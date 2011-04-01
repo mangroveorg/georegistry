@@ -62,7 +62,7 @@ The above query return a GeoJSON object which may look something like ....
                     "properties_type": "school", 
                     "country_code": "GH", 
                     "_id": "7718277c-b149-4c14-9a23-8510707da64a", 
-                    "id": "TR-7718277c-8510707da64a"
+                    "id": "GR-7718277c-8510707da64a"
                 }
             }
         ]
