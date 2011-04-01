@@ -32,7 +32,7 @@ RESTCat server documentation for server setup here:
 --------------------
 The following describes how a client might fetch a geoprapic feature using the API:
 
-	http://api.georegistry.org/api/v1/TR-7718277c-8510707da64a.json
+	http://api.georegistry.org/api/v1/GR-7718277c-8510707da64a.json
 
 All that needs to happen is to go to this url (and be authenticated to access
 the resource).  You need a username and password to access to authenticate.
@@ -52,7 +52,7 @@ The above query return a GeoJSON object which may look something like ....
             {
                 "geometry": {
                     "type": "Point", 
-                    "coordinates": "[0.0, 0]"
+                    "coordinates": "[0.0, 0.0]"
                 }, 
                 "type": "Feature", 
                 "properties": {
