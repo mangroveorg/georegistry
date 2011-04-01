@@ -1,0 +1,15 @@
+*.pyc
+*.db
+*.sqlite*
+~*
+*~
+*.orig
+private
+*.log
+*.log.*
+db
+*.kpf
+*.xls
+*.csv
+*.gadm
+*.gadl
