@@ -39,7 +39,7 @@ the resource).  You need a username and password to access to authenticate.
 
 For Example, we could do this in any programming language or use a tool like curl.
 ::
-    curl -u testuser:testpass http://api.georegistry.org/api/1.0/TR-7718277c-8510707da64a.json
+    curl -u testuser:testpass http://api.georegistry.org/api/1.0/GR-7718277c-8510707da64a.json
 
 
 The above query return a GeoJSON object which may look something like ....
