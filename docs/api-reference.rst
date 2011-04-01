@@ -25,14 +25,14 @@ This document describes how to use the API (as a client), and does
 not cover Georegistry server configuration.  For server configuration, see the
 RESTCat server documentation for server setup here: 
 
-	http://github.com/mvpdev/georegistry/README.rst
+	http://github.com/mangroveorg/georegistry/README.rst
         
 
 1.2 A Quick Example:
 --------------------
 The following describes how a client might fetch a geoprapic feature using the API:
 
-	http://georegistry.com/api/v1/TR-7718277c-8510707da64a.json
+	http://api.georegistry.org/api/v1/TR-7718277c-8510707da64a.json
 
 All that needs to happen is to go to this url (and be authenticated to access
 the resource).  You need a username and password to access to authenticate.
