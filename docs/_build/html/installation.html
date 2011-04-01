@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing Georegistry: &mdash; Georegistry v0.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Georegistry v0.0.2 documentation" href="index.html" />
+    <link rel="next" title="Georegistry API Tutorial:" href="api-reference.html" />
+    <link rel="prev" title="Welcome to Georegistry’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api-reference.html" title="Georegistry API Tutorial:"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Georegistry’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Georegistry v0.0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installing-georegistry">
+<h1>Installing Georegistry:<a class="headerlink" href="#installing-georegistry" title="Permalink to this headline">¶</a></h1>
+<p>Georegistry requires MongoDB, Python, PostgreSQL, Django, and a variety of
+related dependences.  It also requires a web server to run in a production mode.</p>
+<p>This document outlines Georegistry configuration for on Ubuntu 10.10 Linux
+system running Apache2 as the web server. you may need to adjust these
+directions slighly or significantly to get the service to run on other flavors
+of Linux, Unix, Mac OS X, or Windows.</p>
+</div>
+<div class="section" id="mongodb-setup">
+<h1>MongoDB Setup:<a class="headerlink" href="#mongodb-setup" title="Permalink to this headline">¶</a></h1>
+<p>Georegistry requires MongoDB and for special geospatial indicies to be created.
+Follow the steps below carefully.</p>
+<div class="section" id="install-mongodb">
+<h2>Install MongoDB:<a class="headerlink" href="#install-mongodb" title="Permalink to this headline">¶</a></h2>
+<p>Install mongo on your system.</p>
+<div class="highlight-python"><pre>wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-1.8.0.tgz
+tar zxvf mongodb-linux-x86_64-1.8.0.tgz
+cd mongodb-linux-x86_64-1.8.0/bin</pre>
+</div>
+<p>Make a directory for the data.  We are using the directory /home/alan/.data as
+an example.  The point is to create a directory to hold the data files.</p>
+<div class="highlight-python"><pre>mkdir /home/alan/.data/</pre>
+</div>
+<p>Start the database:</p>
+<div class="highlight-python"><pre>./mongod --dbpath=/home/alan/.data/</pre>
+</div>
+<p>I like to add a line in my .basrc to easily start MongoDB. (adjust for your
+environment)</p>
+<div class="highlight-python"><pre>alias mgdb='/home/alan/.bin/mongodb-linux-x86_64-1.8.0/bin/mongod --dbpath=/home/alan/.data/'</pre>
+</div>
+<p>To re-read baschrc without opening anew window, type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">source</span> <span class="o">.</span><span class="n">bashrc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-necessary-indecies">
+<h2>Create the Necessary Indecies:<a class="headerlink" href="#create-the-necessary-indecies" title="Permalink to this headline">¶</a></h2>
+<p>Enter the Mongo shell and connect to your database and collection.  We are
+assuming the names georegistry02/georegistry02 respecitvley.</p>
+<div class="highlight-python"><pre>&gt;mongo
+db = connect("localhost/georegistry02");
+use georegistry02;</pre>
+</div>
+<p>Create the necessary indecies. Do this for your main, historical, and verified
+collections.  These should correspond to the values in the settings.py file
+which is part of the Georegistry Django application.</p>
+<div class="highlight-python"><pre>db.places.ensureIndex( { loc : "2d" } )
+db.&lt;collection_name&gt;.ensureIndex( { geometry_coordinates : "2d" } )
+db.&lt;collection_name&gt;.ensureIndex( { 'country_code' : 1 } )
+db.&lt;collection_name&gt;.ensureIndex( { 'id' : 1 } )</pre>
+</div>
+<p>Just as an FYI, here is how to display everything in the collection as JSON.</p>
+<div class="highlight-python"><pre>db.&lt;collection_name&gt;.find().forEach(printjson);</pre>
+</div>
+</div>
+</div>
+<div class="section" id="install-prerequisites-for-georegistry">
+<h1>Install prerequisites for Georegistry:<a class="headerlink" href="#install-prerequisites-for-georegistry" title="Permalink to this headline">¶</a></h1>
+<p>These instruction may need to be modified based on your flavor/version of
+Linux/Unix.</p>
+<p>For example, you could install python-imaging with pip, by typing:</p>
+<div class="highlight-python"><pre>sudo pip install PIL</pre>
+</div>
+<p>...or you could install it via a Linux distrobution package such as Ubuntu 10.10</p>
+<div class="highlight-python"><pre>sudo apt-get install python-imaging</pre>
+</div>
+<div class="section" id="setup-on-ubuntu-10-10">
+<h2>Setup on Ubuntu 10.10:<a class="headerlink" href="#setup-on-ubuntu-10-10" title="Permalink to this headline">¶</a></h2>
+<p>Grab the necessary prerequisite Ubuntu packages</p>
+<div class="highlight-python"><pre>sudo apt-get update
+sudo apt-get install python-imaging git-core mercurlial build-essental python2.6-dev python-setuptools libdecodeqr0 libdecodeqr-dev libqrencode3 libqrencode-dev
+sudo easy_install pip</pre>
+</div>
+<p>Install Django 1.3</p>
+<div class="highlight-python"><pre>sudo pip install Django</pre>
+</div>
+<p>Download the Georegistry application:</p>
+<div class="highlight-python"><pre>git clone git://github.com/mvpdev/georegistry.git
+cd georegistry</pre>
+</div>
+<p>Install more prereqiusites per the requirements file:</p>
+<div class="highlight-python"><pre>sudo pip install -r requirements.txt</pre>
+</div>
+<p>Create the database</p>
+<div class="highlight-python"><pre>python manage.py syncdb</pre>
+</div>
+<p>Run the development server:</p>
+<div class="highlight-python"><pre>python managae.py runserver</pre>
+</div>
+<p>Now that you have the server running in a develoment environment.  See
+georegistry/apache/READE.rst for instructions to congigure the application with Apache2.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installing Georegistry:</a></li>
+<li><a class="reference internal" href="#mongodb-setup">MongoDB Setup:</a><ul>
+<li><a class="reference internal" href="#install-mongodb">Install MongoDB:</a></li>
+<li><a class="reference internal" href="#create-the-necessary-indecies">Create the Necessary Indecies:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#install-prerequisites-for-georegistry">Install prerequisites for Georegistry:</a><ul>
+<li><a class="reference internal" href="#setup-on-ubuntu-10-10">Setup on Ubuntu 10.10:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Georegistry&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api-reference.html"
+                        title="next chapter">Georegistry API Tutorial:</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/installation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="api-reference.html" title="Georegistry API Tutorial:"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Georegistry’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">Georegistry v0.0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Alan Viars.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

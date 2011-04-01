@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Georegistry API Tutorial: &mdash; Georegistry v0.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Georegistry v0.0.2 documentation" href="index.html" />
+    <link rel="prev" title="Installing Georegistry:" href="installation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installing Georegistry:"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Georegistry v0.0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="georegistry-api-tutorial">
+<h1>Georegistry API Tutorial:<a class="headerlink" href="#georegistry-api-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+</div>
+<div class="section" id="overview">
+<h1>1. Overview:<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>Georegistry is an easy to use RESTful geospatial health index designed to
+improve global health through increased access to information.  It speaks
+GeoJSON by default. Its hosted at georegistry.com</p>
+<div class="section" id="technical-details">
+<h2>1.1 Technical Details:<a class="headerlink" href="#technical-details" title="Permalink to this headline">¶</a></h2>
+<p>This document describes how to use the API (as a client), and does
+not cover Georegistry server configuration.  For server configuration, see the
+RESTCat server documentation for server setup here:</p>
+<blockquote>
+<div><a class="reference external" href="http://github.com/mangroveorg/georegistry/README.rst">http://github.com/mangroveorg/georegistry/README.rst</a></div></blockquote>
+</div>
+<div class="section" id="a-quick-example">
+<h2>1.2 A Quick Example:<a class="headerlink" href="#a-quick-example" title="Permalink to this headline">¶</a></h2>
+<p>The following describes how a client might fetch a geoprapic feature using the API:</p>
+<blockquote>
+<div><a class="reference external" href="http://api.georegistry.org/api/v1/GR-7718277c-8510707da64a.json">http://api.georegistry.org/api/v1/GR-7718277c-8510707da64a.json</a></div></blockquote>
+<p>All that needs to happen is to go to this url (and be authenticated to access
+the resource).  You need a username and password to access to authenticate.</p>
+<p>For Example, we could do this in any programming language or use a tool like curl.</p>
+<div class="highlight-python"><pre>curl -u testuser:testpass http://api.georegistry.org/api/1.0/GR-7718277c-8510707da64a.json</pre>
+</div>
+<p>The above query return a GeoJSON object which may look something like ....</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="s">&quot;total&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;FeatureCollection&quot;</span><span class="p">,</span>
+    <span class="s">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;Point&quot;</span><span class="p">,</span>
+                <span class="s">&quot;coordinates&quot;</span><span class="p">:</span> <span class="s">&quot;[0.0, 0.0]&quot;</span>
+            <span class="p">},</span>
+            <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;Feature&quot;</span><span class="p">,</span>
+            <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;fgf&quot;</span><span class="p">,</span>
+                <span class="s">&quot;subdivision_code&quot;</span><span class="p">:</span> <span class="s">&quot;AH&quot;</span><span class="p">,</span>
+                <span class="s">&quot;epoch&quot;</span><span class="p">:</span> <span class="s">&quot;1297102984&quot;</span><span class="p">,</span>
+                <span class="s">&quot;properties_type&quot;</span><span class="p">:</span> <span class="s">&quot;school&quot;</span><span class="p">,</span>
+                <span class="s">&quot;country_code&quot;</span><span class="p">:</span> <span class="s">&quot;GH&quot;</span><span class="p">,</span>
+                <span class="s">&quot;_id&quot;</span><span class="p">:</span> <span class="s">&quot;7718277c-b149-4c14-9a23-8510707da64a&quot;</span><span class="p">,</span>
+                <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;GR-7718277c-8510707da64a&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-methods-for-manipulating-features">
+<h2>1.3 API Methods for Manipulating Features:<a class="headerlink" href="#api-methods-for-manipulating-features" title="Permalink to this headline">¶</a></h2>
+<p>Key:</p>
+<p>&lt;&gt; = required</p>
+<p>[] = optional</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="5%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">BASE URL</th>
+<th class="head">HTTP METHOD</th>
+<th class="head">FUNCTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>/api/1.0/createfeature/</td>
+<td>GET/POST</td>
+<td>POST:Create a feature in the MAIN collection. GET returns a blank form.</td>
+</tr>
+<tr><td>/api/1.0/updatefeature/&lt;feature_id&gt;</td>
+<td>GET/POST</td>
+<td>POST:Update the existing feature, feature_id, in the MAIN collection. GET returns a blank form.</td>
+</tr>
+<tr><td>/api/1.0/editfeature/&lt;feature_id&gt;</td>
+<td>GET/POST</td>
+<td>POST:Edit the existing feature, feature_id, in the MAIN collection. GET returns a prepopulated form.</td>
+</tr>
+<tr><td>/api/1.0/deletefeature/</td>
+<td>GET/POST</td>
+<td>POST:Delete the existing feature, feature_id, in the MAIN collection. GET returns a feature_id (single field) form.</td>
+</tr>
+<tr><td>/api/1.0/collection/&lt;collection_name&gt;/updatefeature/&lt;feature_id&gt;</td>
+<td>GET/POST</td>
+<td>POST:Update the existing feature, feature_id, in the collection_id. GET returns a blank form.</td>
+</tr>
+<tr><td>/api/1.0/collection/&lt;collection_name&gt;/editfeature/&lt;feature_id&gt;</td>
+<td>GET/POST</td>
+<td>POST:Edit the existing feature, feature_id, in the collection_id. GET returns a prepopulated form.</td>
+</tr>
+<tr><td>/api/1.0/collection/&lt;collection_name&gt;/deletefeature/</td>
+<td>GET/POST</td>
+<td>POST:Delete the existing feature, feature_id, in the collection_id. GET returns a feature_id (single field) form.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="api-methods-for-querying-features">
+<h2>1.4 API Methods for Querying Features:<a class="headerlink" href="#api-methods-for-querying-features" title="Permalink to this headline">¶</a></h2>
+<p>Key:</p>
+<p>&lt;&gt; = required</p>
+<p>[] = optional</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="5%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">BASE URL</th>
+<th class="head">HTTP METHOD</th>
+<th class="head">FUNCTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>/api/1.0/feature/&lt;feature_id&gt;.json</td>
+<td>GET</td>
+<td>Get the GeoJSON Code for a feature</td>
+</tr>
+<tr><td>/api/1.0/feature/&lt;feature_id&gt;.png</td>
+<td>GET</td>
+<td>Get the QR for a feature</td>
+</tr>
+<tr><td>/api/1.0/feature/&lt;feature_id&gt;&#64;&lt;epoch&gt;.json</td>
+<td>GET</td>
+<td>Get the GeoJSON Code for a feature at a particular epoch (timestamp)</td>
+</tr>
+<tr><td>/api/1.0/feature/&lt;feature_id&gt;&#64;&lt;epoch&gt;.png</td>
+<td>GET</td>
+<td>Get the QR for a feature at a particular epoch (timestamp)</td>
+</tr>
+<tr><td>/api/1.0/features/search?&lt;some GET query string&gt;</td>
+<td>GET</td>
+<td>Get all features that match the search dict passed in.</td>
+</tr>
+<tr><td>/api/1.0/features/country/&lt;country_code&gt;[-subdivision_code].json</td>
+<td>GET</td>
+<td>Get all features with a particular country and or subdivision code (ISO 3166-1) eg. GH or GH-AH</td>
+</tr>
+<tr><td>/api/1.0/features/at-point/&lt;lat&gt;/&lt;lon&gt;/</td>
+<td>GET</td>
+<td>Get all point features at a specific lat/long point</td>
+</tr>
+<tr><td>/api/1.0/features/near-point/&lt;lat&gt;/&lt;lon&gt;/&lt;limit&gt;/&lt;distance&gt;</td>
+<td>GET</td>
+<td>Get all features near a specific lat/long point</td>
+</tr>
+<tr><td>/api/1.0/features/containing-point/&lt;lat&gt;/&lt;lon&gt;/</td>
+<td>GET</td>
+<td>Get all features containing a specific lat/long point with a limit of &lt;limit&gt; and a max distance of &lt;max_distance&gt;</td>
+</tr>
+<tr><td>/api/1.0/features/in-boundingbox/&lt;botleft_lon&gt;/botleft_lat&gt;/&lt;topright_lon&gt;/&lt;topright_lat&gt;/</td>
+<td>GET</td>
+<td>Get all featues in a bounding box og bottom left and top right lat/long</td>
+</tr>
+<tr><td>/api/1.0/history/feature/&lt;feature_id&gt;.json</td>
+<td>GET</td>
+<td>Get the GeoJSON for a historical feature  (historical= a feature that has been suplanted by a newer version)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Georegistry API Tutorial:</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#overview">1. Overview:</a><ul>
+<li><a class="reference internal" href="#technical-details">1.1 Technical Details:</a></li>
+<li><a class="reference internal" href="#a-quick-example">1.2 A Quick Example:</a></li>
+<li><a class="reference internal" href="#api-methods-for-manipulating-features">1.3 API Methods for Manipulating Features:</a></li>
+<li><a class="reference internal" href="#api-methods-for-querying-features">1.4 API Methods for Querying Features:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installing Georegistry:</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/api-reference.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installing Georegistry:"
+             >previous</a> |</li>
+        <li><a href="index.html">Georegistry v0.0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Alan Viars.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
