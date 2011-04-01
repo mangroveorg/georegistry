@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Georegistry's documentation!
+Welcome to Georegistry's Documentation!
 =======================================
 
 Georegistry is a Geospatial Health RESTful Webservice.  You can think of it
