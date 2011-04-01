@@ -108,16 +108,16 @@ def update_feature(request):
                               context_instance = RequestContext(request))
  
  
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_json_feature_by_id(request, feature_id, collection_name=None): 
     """ Return geographic feature matching feature_id. """
     return get_document_by(request, id=feature_id, search_in=('url',),
                            collection_name=collection_name)
   
 
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_json_feature_by_id_and_epoch(request, feature_id, 
                                      epoch, collection_name=None):   
     #import ipdb; ipdb.set_trace()
@@ -133,8 +133,8 @@ def get_json_feature_by_id_and_epoch(request, feature_id,
                            search_in=('url',), collection_name=collection_name)
 
 
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_qr_feature_by(request, collection_name=None, **kwargs):
     """
         Return QR code image matching the geographic feature matching
@@ -153,8 +153,8 @@ def get_qr_feature_by(request, collection_name=None, **kwargs):
     return response
 
 
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_qr_feature_by_id(request, feature_id, collection_name=None):
     """
         Return QR code image matching the geographic feature matching
@@ -173,8 +173,8 @@ def get_qr_feature_by_id(request, feature_id, collection_name=None):
     return response
     
 
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_qr_feature_by_id_and_epoch(request, feature_id, 
                                    epoch, collection_name=None):
     """
@@ -196,8 +196,8 @@ def get_qr_feature_by_id_and_epoch(request, feature_id,
     
 
 
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_features_in_country_subdivision(request, country_subdivision_code):
     country_subdivision_code = country_subdivision_code.upper()
     
@@ -212,8 +212,8 @@ def get_features_in_country_subdivision(request, country_subdivision_code):
 
 
 
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_features_search_dict(request):
     """
         Return a geographic features matching GET parameters.
@@ -221,8 +221,8 @@ def get_features_search_dict(request):
     return get_document_by(request, search_in=('get',))
 
 
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_features_in_boundingbox(request, botleft_lon, botleft_lat,
                                 topright_lon, topright_lat):
     """
@@ -237,8 +237,8 @@ def get_features_in_boundingbox(request, botleft_lon, botleft_lat,
                            geometry_coordinates={'$within': searchbox})
    
    
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_features_at_point(request, lon, lat):
     """
         Return a geographic features located at these exact coordinates.
@@ -247,8 +247,8 @@ def get_features_at_point(request, lon, lat):
                            geometry_coordinates=[float(lon), float(lat)])
  
     
-@json_login_required
-@access_required("read_feature")
+#@json_login_required
+#@access_required("read_feature")
 def get_features_near_point(request, lat, lon, max_distance=None, limit=None):
     """
         Return a geographic features located neat these coordinates.
@@ -266,12 +266,12 @@ def get_features_near_point(request, lat, lon, max_distance=None, limit=None):
                                geometry_coordinates=ll,
                                )
 
-@json_login_required
+#@json_login_required
 def get_features_in_polygon(request, feature_id):
     return HttpResponse("Not implemented yet.")
 
 
-@json_login_required
+#@json_login_required
 def get_features_containing_point(request, lon, lat):
     return HttpResponse("Not implemented yet.")
 
