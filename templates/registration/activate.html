@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block featureBox %}
+
+  {% if account %}
+  Thank you for registering!
+  Please login.
+  <form action="/login/" method="POST">
+    {{auth_form.as_p}}
+    <input type="submit" value="login" />
+  </form>
+ {% else %}
+  Activation failed. Please try
+  <a href="/accounts/register">registering</a>
+  again or contact the webmaster.
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,5 @@
+{
+    "type": {{ FeatureType }},
+    "features": {{ features }},
+    "properties": {{ properties }}
+}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block extra_head %}
+
+
+{% endblock %}
+
+{% block featureBox %}
+
+    <h1>Welcome to the Georegistry API Web Service!</h1>
+    <p>Georegistry is a geospatial health information service. It is accessed
+    via a RESTful API and speaks GeoJSON.<p>
+		{% load media %}
+                <img src="{% media_url %}/img/Rsrch_HomeBanner_2.jpg"></img>
+                
+    
+    
+    {% if not user.is_authenticated %}
+            {% if form.errors %}
+                    <p class="error">Sorry, that's not a valid username or password</p>
+            {% endif %}
+
+            <form action='/login/' method='POST'>
+                    <label for="username">User name:</label>
+                    <input type="text" name="username" value="" id="username">
+                    <br>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" value="" id="password">
+                    <br>
+                    <input type="submit" value="login" />
+                    <input type="hidden" name="next" value="{{ next|escape }}" />
+            </form>
+            Dont' have an account yet?  <a href="/accounts/register">Register here</a>
+    {% endif %}
+                
+
+
+   <p>Get started by looking at the  <a HREF="https://github.com/mvpdev/georegistry/blob/master/docs/api-reference.rst">Online Documentation</a>.</p>
+
+<h1>Quick Links:</h1>
+<ul>
+<li> <a href="/api/1.0/createfeature/">API: Create a new feature in the Georegistry</a> </li>
+<li> <a href="http://www.georegistry.org">Client Website (Reference Implementation Example)</a> </li>
+</ul>
+<p>Please pardon our mess.  This site is under construction!</p>
+
+{% endblock %}

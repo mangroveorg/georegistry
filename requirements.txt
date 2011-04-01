@@ -1,0 +1,11 @@
+-e git+https://github.com/aviars/simple_locations.git#egg=simple_locations
+-e git+https://github.com/django-mptt/django-mptt.git#egg=mptt
+-e git+https://github.com/aviars/django-registration.git#egg=django-registration
+-e git+https://github.com/sunlightlabs/django-mediasync.git#egg=django-mediasync
+qrencode
+pymongo
+pytz
+bson
+pil
+Django
+geohash

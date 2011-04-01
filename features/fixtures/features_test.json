@@ -1,0 +1,953 @@
+[
+    {
+        "pk": 52, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_permission", 
+            "name": "Can add permission", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_permission", 
+            "name": "Can change permission", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_permission", 
+            "name": "Can delete permission", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_userprofile", 
+            "name": "Can add user profile", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_userprofile", 
+            "name": "Can change user profile", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_userprofile", 
+            "name": "Can delete user profile", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_logentry", 
+            "name": "Can add log entry", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_logentry", 
+            "name": "Can change log entry", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_logentry", 
+            "name": "Can delete log entry", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_group", 
+            "name": "Can add group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_group", 
+            "name": "Can change group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_group", 
+            "name": "Can delete group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_message", 
+            "name": "Can add message", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_message", 
+            "name": "Can change message", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_message", 
+            "name": "Can delete message", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_permission", 
+            "name": "Can add permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_permission", 
+            "name": "Can change permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_permission", 
+            "name": "Can delete permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_user", 
+            "name": "Can add user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_user", 
+            "name": "Can change user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_user", 
+            "name": "Can delete user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_contenttype", 
+            "name": "Can add content type", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_contenttype", 
+            "name": "Can change content type", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_contenttype", 
+            "name": "Can delete content type", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_country", 
+            "name": "Can add country", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_country", 
+            "name": "Can change country", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_country", 
+            "name": "Can delete country", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_district", 
+            "name": "Can add district", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_district", 
+            "name": "Can change district", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_district", 
+            "name": "Can delete district", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_subdivision", 
+            "name": "Can add subdivision", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_subdivision", 
+            "name": "Can change subdivision", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_subdivision", 
+            "name": "Can delete subdivision", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_town", 
+            "name": "Can add town", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_town", 
+            "name": "Can change town", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_town", 
+            "name": "Can delete town", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_registrationprofile", 
+            "name": "Can add registration profile", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_registrationprofile", 
+            "name": "Can change registration profile", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_registrationprofile", 
+            "name": "Can delete registration profile", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_session", 
+            "name": "Can add session", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_session", 
+            "name": "Can change session", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_session", 
+            "name": "Can delete session", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_area", 
+            "name": "Can add Area", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_area", 
+            "name": "Can change Area", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_area", 
+            "name": "Can delete Area", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_areatype", 
+            "name": "Can add Area Type", 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_areatype", 
+            "name": "Can change Area Type", 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_areatype", 
+            "name": "Can delete Area Type", 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_point", 
+            "name": "Can add Point", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_point", 
+            "name": "Can change Point", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_point", 
+            "name": "Can delete Point", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_since", 
+            "name": "Can add since", 
+            "content_type": 23
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_since", 
+            "name": "Can change since", 
+            "content_type": 23
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_since", 
+            "name": "Can delete since", 
+            "content_type": 23
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_site", 
+            "name": "Can add site", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_site", 
+            "name": "Can change site", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_site", 
+            "name": "Can delete site", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_attachment", 
+            "name": "Can add attachment", 
+            "content_type": 22
+        }
+    }, 
+    {
+        "pk": 65, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_attachment", 
+            "name": "Can change attachment", 
+            "content_type": 22
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_attachment", 
+            "name": "Can delete attachment", 
+            "content_type": 22
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_instance", 
+            "name": "Can add instance", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_instance", 
+            "name": "Can change instance", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_instance", 
+            "name": "Can delete instance", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_surveytype", 
+            "name": "Can add survey type", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_surveytype", 
+            "name": "Can change survey type", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_surveytype", 
+            "name": "Can delete survey type", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_xform", 
+            "name": "Can add XForm", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_xform", 
+            "name": "Can change XForm", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_xform", 
+            "name": "Can delete XForm", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "admin", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2011-02-14 12:53:06", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$1f17d$e5c393bbacbde7d42d7a55533fce5808658bb5e2", 
+            "email": "admin@admin.admin", 
+            "date_joined": "2011-02-09 16:22:58"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "test", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-02-11 18:12:08", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "test", 
+            "email": "", 
+            "date_joined": "2011-02-11 18:12:08"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "test2", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-02-11 18:12:55", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$fcb3c$efb93e17beaffbefbb6db95df8b6bb98aea27f67", 
+            "email": "", 
+            "date_joined": "2011-02-11 18:12:55"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "simple_locations.point", 
+        "fields": {
+            "latitude": "48.862787", 
+            "longitude": "2.373047"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "state", 
+            "slug": "state"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "parish", 
+            "slug": "parish"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "emirate", 
+            "slug": "emirate"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "region", 
+            "slug": "region"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "administrative atoll", 
+            "slug": "administrative-atoll"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "municipality", 
+            "slug": "municipality"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "republic", 
+            "slug": "republic"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "district", 
+            "slug": "district"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "governorate", 
+            "slug": "governorate"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "territory", 
+            "slug": "territory"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "city", 
+            "slug": "city"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "division", 
+            "slug": "division"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "special zone", 
+            "slug": "special-zone"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "prefecture", 
+            "slug": "prefecture"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "geographical unit", 
+            "slug": "geographical-unit"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "autonomous-province", 
+            "slug": "autonomous-province"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "special-district", 
+            "slug": "special-district"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "special region", 
+            "slug": "special-region"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "country", 
+            "slug": "country"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "county", 
+            "slug": "county"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "subdivision", 
+            "slug": "subdivision"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "town", 
+            "slug": "town"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "simple_locations.areatype", 
+        "fields": {
+            "name": "village", 
+            "slug": "village"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "simple_locations.area", 
+        "fields": {
+            "rght": 3, 
+            "kind": 11, 
+            "code": "A001", 
+            "name": "Paris", 
+            "parent": 2, 
+            "level": 1, 
+            "lft": 2, 
+            "two_letter_iso_subdivision_code": "FR", 
+            "location": 1, 
+            "tree_id": 1, 
+            "two_letter_iso_country_code": "FR"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "simple_locations.area", 
+        "fields": {
+            "rght": 4, 
+            "kind": 19, 
+            "code": "fr", 
+            "name": "France", 
+            "parent": null, 
+            "level": 0, 
+            "lft": 1, 
+            "two_letter_iso_subdivision_code": "fr", 
+            "location": null, 
+            "tree_id": 1, 
+            "two_letter_iso_country_code": "FR"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "countries.country", 
+        "fields": {
+            "name": "France", 
+            "subd7": "", 
+            "subd6": "", 
+            "subd5": "", 
+            "subd4": "", 
+            "subd3": "", 
+            "subd2": "", 
+            "subd1": "region", 
+            "isocode": "FR", 
+            "subd8": ""
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "countries.subdivision", 
+        "fields": {
+            "country": 1, 
+            "province_class": "region", 
+            "isocode": "FR", 
+            "name": "IDF"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "sinceindex.since", 
+        "fields": {
+            "sinceid": 2
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "sinceindex.since", 
+        "fields": {
+            "sinceid": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "accounts.userprofile", 
+        "fields": {
+            "organization_name": "", 
+            "mobile_phone_number": "", 
+            "user": 1, 
+            "twitter": ""
+        }
+    }
+]

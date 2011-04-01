@@ -1,0 +1,5 @@
+Please visit http://127.0.0.1:8000/accounts/activate/{{ activation_key }} to activate your account.
+
+Montani Semper Liberi,
+
+--georegistry.com

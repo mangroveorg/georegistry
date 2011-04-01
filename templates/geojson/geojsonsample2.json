@@ -1,0 +1,38 @@
+{
+   "total":20,
+   "type":"FeatureCollection",
+   "features":[
+      {
+         "geometry":{
+            "type":"Point",
+            "coordinates":[
+               -122.428938,
+               37.766713
+            ]
+         },
+         "type":"Feature",
+         "id":"SG_2AziTafTLNReeHpRRkfipn_37.766713_-122.428938@1291796505",
+         "properties":{
+            "province":"CA",
+            "city":"San Francisco",
+            "name":"Sparky's 24 Hour Diner",
+            "tags":[
+               ""
+            ],
+            "country":"US",
+            "phone":"+1 415 626 8666",
+            "address":"242 Church St",
+            "owner":"simplegeo",
+            "postcode":"94114",
+            "classifiers":[
+               {
+                  "category":"Restaurant",
+                  "type":"Food & Drink",
+                  "subcategory":""
+               }
+            ]
+         }
+      },
+   // 19 more features...
+   ]
+}

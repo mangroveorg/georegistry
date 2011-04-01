@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block featureBox %}
+<div id="featureBox">
+	<h2>Register:</h2>
+		<form action="." method="POST">
+			<fieldset>
+				{{ form.as_p }}
+				<input type="submit" value="Register" class="submit" />
+			</fieldset>
+		</form>
+		<p id="warning">
+			NOTICE: trke is in beta and by signing up you
+			are agreeing to theterms of service</a>.
+</div>
+{% endblock %}
