@@ -72,7 +72,7 @@ def query_mongo_db_forms(kwargs, collection_name=None):
     
 #if not in this list then we should pack it into properties or geometry
 top_level_fields=('total', 'status', 'geometry',)
-
+feature_level_fields=('id', 'epoch', 'sinceid', '_id', '')
 def query_mongo_db(kwargs, limit=None, collection_name=None):
     """
     query mongo and unflatten the results so its pretty json
@@ -80,7 +80,6 @@ def query_mongo_db(kwargs, limit=None, collection_name=None):
     """return a result list or an empty list"""
     if limit:
         limit=int(limit)
-    print kwargs
     features=[]
     search_list=False
     response_dict={'status': 404,
@@ -248,8 +247,11 @@ def unflatten_properties(d):
         if k not in top_level_fields:
             properties[k]=v
             del d[k]
+    for k,v in properties.items():
+        if k in feature_level_fields:
+            d[k]=v
+            del properties[k]
     d['properties']=properties
-    
     return d
 
 def unflatten(d):
