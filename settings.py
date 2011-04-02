@@ -126,7 +126,6 @@ INSTALLED_APPS = (
     'registration',
     'mediasync',
     'georegistry.accounts',
-    'georegistry.sinceindex',
     'georegistry.webhook',
     #'xform_manager',
     # Uncomment the next line to enable admin documentation:
