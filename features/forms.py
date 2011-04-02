@@ -4,13 +4,43 @@
 from django import forms
 
 from validators import country_code, subdivision_code, geometry
-from models import (geometry_choices, properties_feature_type_choices,
-                                 validity_choices, status_choices)
+from models import geometry_choices, validity_choices, status_choices
 
 from georegistry.rest_mongo.forms import JsonMongoForm
+from models import FacilityType, Classifiers
+
+try:
+    facility_type_list=[]
+    ft=FacilityType.objects.all()
+    for i in ft:
+        facility_type_list.append(i.slug)
+    facility_type_list2=facility_type_list
+    facility_type_list=tuple(facility_type_list)
+    
+    properties_feature_type_choices_tuple=tuple(facility_type_list)
+    properties_feature_type_choices=tuple(zip(facility_type_list, facility_type_list2))
+    
+except():
+    pass
+
+try:
+    classifiers_list=[]
+    classifiers_list2=[]
+    cl=Classifiers.objects.all()
+    for i in cl:
+        classifiers_list.append(i)
+        classifiers_list2.append(i.__to_json__())
+    classifiers_list=tuple(classifiers_list)
+    
+    classifier_choices_tuple=tuple(classifiers_list)
+    classifier_choices=tuple(zip(classifiers_list2, classifiers_list))
+    
+except():
+    pass
+
 
 class FeatureUploadForm(JsonMongoForm):
-    """ Create / update a geographic feature and save it into Mango DB """
+    """ Create / update a geographic feature and save it into MongoDB """
     
     TYPE = 'FeatureCollection'
     
@@ -30,6 +60,10 @@ class FeatureUploadForm(JsonMongoForm):
                                            required=False)
     feature_type = forms.TypedChoiceField(label="Properties Feature Type", 
                                           choices=properties_feature_type_choices)
+    
+    classifiers = forms.TypedChoiceField(label="Classifiers", 
+                                          choices=classifier_choices)
+    
     country_code = forms.CharField(max_length=2, 
                                    label="2 Letter ISO Country Code",
                                    validators=[country_code.validate])
@@ -89,7 +123,7 @@ class FeatureUploadForm(JsonMongoForm):
 
 
 class FeatureUpdateUploadForm(JsonMongoForm):
-    """ Create / update a geographic feature and save it into Mango DB """
+    """ Create / update a geographic feature and save it into Mongo DB """
     
     TYPE = 'FeatureCollection'
     feature_id = forms.CharField(max_length=300, label="FeatureID")
@@ -110,6 +144,8 @@ class FeatureUpdateUploadForm(JsonMongoForm):
     
     feature_type = forms.TypedChoiceField(label="Properties Feature Type", 
                                           choices=properties_feature_type_choices, required=False)
+    
+    classifiers = forms.TypedChoiceField(label="Classifiers", choices=classifier_choices)
     country_code = forms.CharField(max_length=2, 
                                    label="2 Letter ISO Country Code",
                                    validators=[country_code.validate], required=False)
@@ -160,7 +196,7 @@ class FeatureUpdateUploadForm(JsonMongoForm):
         return subdivision_code.upper()
 
 class FeatureEditUploadForm(JsonMongoForm):
-    """ Create / update a geographic feature and save it into Mango DB """
+    """ Create / update a geographic feature and save it into Mongo DB """
     
     TYPE = 'FeatureCollection'
     feature_id = forms.CharField(max_length=300, label="FeatureID")
@@ -183,6 +219,10 @@ class FeatureEditUploadForm(JsonMongoForm):
     
     feature_type = forms.TypedChoiceField(label="Properties Feature Type", 
                                           choices=properties_feature_type_choices, required=False)
+    
+    classifiers = forms.TypedChoiceField(label="Classifiers", choices=classifier_choices)    
+    
+    
     country_code = forms.CharField(max_length=2, 
                                    label="2 Letter ISO Country Code",
                                    validators=[country_code.validate], required=False)
@@ -233,7 +273,7 @@ class FeatureEditUploadForm(JsonMongoForm):
         return subdivision_code.upper()
 
 class FeatureDeleteUploadForm(JsonMongoForm):
-    """ Create / update a geographic feature and save it into Mango DB """
+    """ Create / update a geographic feature and save it into Mongo DB """
     
     TYPE = 'FeatureCollection'
     feature_id = forms.CharField(max_length=300, label="FeatureID")

@@ -232,8 +232,6 @@ def add_href(d):
                               d['id'],
                               )
     return d
-    
-
 
 def unflatten_geometry(d):
     """Unflatten gemoetry"""

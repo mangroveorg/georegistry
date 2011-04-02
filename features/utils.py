@@ -17,7 +17,7 @@ from pymongo import Connection, json_util
 import os, uuid, time, sys
 from datetime import datetime, timedelta
 from georegistry import settings
-from georegistry.sinceindex.models import Since
+from models import Since, Classifiers
 import Geohash
 
 #if not in this list then we should pack it into properties or geometry
@@ -108,7 +108,10 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
         """Convert tags into a list"""    
         if attrs.has_key('tags'):
                 attrs['tags']=json.loads(attrs['tags'])   
-        
+	if attrs.has_key('classifiers'):
+	    #print "Classifiers: ", attrs['classifiers']
+	    attrs['classifiers']=json.loads(attrs['classifiers'])
+	
         if tr_id:
             """Copy the old tx to the historical collection"""        
             responsedict=raw_query_mongo_db({'id': tr_id})

@@ -4,7 +4,75 @@
 from django.db import models
 from django.utils.translation import ugettext as _, ugettext_lazy as __
 from django.db.utils import DatabaseError
+import json
 
+class ClassifierTypes(models.Model):
+    class Meta:
+        verbose_name = __("ClassifierType")
+        verbose_name_plural = __("ClassifierTypes")
+        ordering = ('name',)
+    
+    name    = models.CharField(max_length=75, unique=True)
+    slug    = models.CharField(max_length=75, unique=True)
+    
+    def __unicode__(self):
+        return self.slug
+
+class ClassifierCategories(models.Model):
+    class Meta:
+        verbose_name = __("ClassifierCategory")
+        verbose_name_plural = __("ClassifierCategories")
+        ordering = ('name',)
+    
+    type    = models.ForeignKey(ClassifierTypes)
+    name    = models.CharField(max_length=75, unique=True)
+    slug    = models.CharField(max_length=75, unique=True)    
+    
+    def __unicode__(self):
+        return self.slug
+    
+class ClassifierSubcategories(models.Model):
+    class Meta:
+        verbose_name = __("ClassifierSubcategory")
+        verbose_name_plural = __("ClassifierSubcategories")
+        ordering = ('name',)
+    
+    category    = models.ForeignKey(ClassifierCategories)
+    name        = models.CharField(max_length=75, unique=True)
+    slug        = models.CharField(max_length=75, unique=True)    
+    
+    def __unicode__(self):
+        return self.slug
+    
+    
+class Classifiers(models.Model):
+    category= models.ForeignKey(ClassifierCategories)
+    subcategory= models.ForeignKey(ClassifierSubcategories, blank=True, null=True)
+    
+    class Meta:
+        verbose_name = __("Classifier")
+        verbose_name_plural = __("Classifiers")
+        unique_together = (("category", "subcategory",) )
+    
+    def __unicode__(self):
+        if self.subcategory:
+            return "%s.%s.%s" % (self.category.type, self.category, self.subcategory)
+        else:
+            return "%s.%s" % (self.category.type, self.category)
+    
+    def __to_dict__(self):
+        if self.subcategory:
+            d={"type": self.category.type.slug,
+                "category": self.category.slug,
+                "subcategory": self.subcategory.slug}
+        else:
+            d={"type": self.category.slug,
+                "category": self.category.slug,
+                "subcategory": ""}
+        return d
+    
+    def __to_json__(self):
+        return json.dumps(self.__to_dict__())
 
 class FacilityType(models.Model):
     class Meta:
@@ -20,19 +88,11 @@ class FacilityType(models.Model):
         return self.name
 
 
-try:
-    facility_type_list=[]
-    ft=FacilityType.objects.all()
-    for i in ft:
-        facility_type_list.append(i.slug)
-    facility_type_list2=facility_type_list
-    facility_type_list=tuple(facility_type_list)
-    
-    properties_feature_type_choices_tuple=tuple(facility_type_list)
-    properties_feature_type_choices=tuple(zip(facility_type_list, facility_type_list2))
-    
-except():
-    pass
+class Since(models.Model):
+    sinceid = models.IntegerField(default=0)
+    def __unicode__(self):
+        return str(self.sinceid)
+
 
 """type of GIS"""
 geometry_choices =(
