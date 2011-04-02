@@ -7,21 +7,8 @@ from validators import country_code, subdivision_code, geometry
 from models import geometry_choices, validity_choices, status_choices
 
 from georegistry.rest_mongo.forms import JsonMongoForm
-from models import FacilityType, Classifiers
+from models import Classifiers
 
-try:
-    facility_type_list=[]
-    ft=FacilityType.objects.all()
-    for i in ft:
-        facility_type_list.append(i.slug)
-    facility_type_list2=facility_type_list
-    facility_type_list=tuple(facility_type_list)
-    
-    properties_feature_type_choices_tuple=tuple(facility_type_list)
-    properties_feature_type_choices=tuple(zip(facility_type_list, facility_type_list2))
-    
-except():
-    pass
 
 try:
     classifiers_list=[]
