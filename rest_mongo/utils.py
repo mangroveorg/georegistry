@@ -14,7 +14,7 @@ except ImportError:
     
 import os, uuid, time, sys
 from datetime import datetime, timedelta
-from georegistry import settings
+from django.conf import settings 
 
 
 def build_utcnow_epoch_timestamp():
@@ -226,7 +226,13 @@ def build_json_error(status, message, **kwargs):
 def flatten_dict(dct):
     return dict([ (str(k), dct.get(k)) for k in dct.keys() ])
 
-
+def add_href(d):
+    if d.has_key('id'):
+        d['href']="%s%s.json" % (settings.BASE_FEATURES_URL,
+                              d['id'],
+                              )
+    return d
+    
 
 
 def unflatten_geometry(d):
@@ -256,4 +262,4 @@ def unflatten_properties(d):
 
 def unflatten(d):
     "Unflatten results from object store into GeoJSON"
-    return unflatten_properties(unflatten_geometry(d))
+    return unflatten_properties(unflatten_geometry(add_href(d)))
