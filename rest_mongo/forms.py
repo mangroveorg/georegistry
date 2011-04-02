@@ -29,7 +29,7 @@ class JsonMongoForm(forms.Form):
         if '_id' in self.cleaned_data:
             self.cleaned_data['_id'] = str(uuid.uuid4())
         if self.request:
-            self.cleaned_data['email'] = getattr(self.request.user, 'email', '') 
+            self.cleaned_data['owner'] = getattr(self.request.user, 'username', '') 
         new_cleaned_data={}  
         
         if not self.cleaned_data.has_key('edit'):
