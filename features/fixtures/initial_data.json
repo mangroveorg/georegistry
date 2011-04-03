@@ -1,2 +1,217 @@
-[{"pk": 5, "model": "features.facilitytype", "fields": {"duplicate_distance_tolerance": 1, "name": "airport", "slug": "airport"}}, {"pk": 4, "model": "features.facilitytype", "fields": {"duplicate_distance_tolerance": 1, "name": "government building", "slug": "government-building"}}, {"pk": 1, "model": "features.facilitytype", "fields": {"duplicate_distance_tolerance": 1, "name": "health-facility", "slug": "health-facility"}}, {"pk": 3, "model": "features.facilitytype", "fields": {"duplicate_distance_tolerance": 1, "name": "school", "slug": "school"}}, {"pk": 2, "model": "features.facilitytype", "fields": {"duplicate_distance_tolerance": 1, "name": "water-point", "slug": "water-point"}}]
-
+[
+    {
+        "pk": 2, 
+        "model": "features.classifiertypes", 
+        "fields": {
+            "name": "Education", 
+            "slug": "education"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "features.classifiertypes", 
+        "fields": {
+            "name": "Government", 
+            "slug": "government"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "features.classifiertypes", 
+        "fields": {
+            "name": "Health", 
+            "slug": "health"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "features.classifiertypes", 
+        "fields": {
+            "name": "Natural Resource", 
+            "slug": "natural-resource"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "features.classifiertypes", 
+        "fields": {
+            "name": "Transportation", 
+            "slug": "transportation"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "features.classifiercategories", 
+        "fields": {
+            "duplicate_distance_tolerance": 1, 
+            "type": 5, 
+            "name": "Airport", 
+            "slug": "airport"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "features.classifiercategories", 
+        "fields": {
+            "duplicate_distance_tolerance": 1, 
+            "type": 1, 
+            "name": "Clinic", 
+            "slug": "clinic"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "features.classifiercategories", 
+        "fields": {
+            "duplicate_distance_tolerance": 1, 
+            "type": 2, 
+            "name": "College", 
+            "slug": "college"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "features.classifiercategories", 
+        "fields": {
+            "duplicate_distance_tolerance": 1, 
+            "type": 1, 
+            "name": "Hospital", 
+            "slug": "hospital"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "features.classifiercategories", 
+        "fields": {
+            "duplicate_distance_tolerance": 1, 
+            "type": 2, 
+            "name": "Primary School", 
+            "slug": "primary-school"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "features.classifiercategories", 
+        "fields": {
+            "duplicate_distance_tolerance": 1, 
+            "type": 2, 
+            "name": "Secondary School", 
+            "slug": "secondary-school"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "features.classifiercategories", 
+        "fields": {
+            "duplicate_distance_tolerance": 1, 
+            "type": 4, 
+            "name": "Water Point", 
+            "slug": "water-point"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "features.classifiersubcategories", 
+        "fields": {
+            "category": 2, 
+            "name": "Religious", 
+            "slug": "religious"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "features.classifiersubcategories", 
+        "fields": {
+            "category": 7, 
+            "name": "Well", 
+            "slug": "well"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 4, 
+            "subcategory": null
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 6, 
+            "subcategory": null
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 1, 
+            "subcategory": null
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 2, 
+            "subcategory": null
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 2, 
+            "subcategory": 1
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 3, 
+            "subcategory": null
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 3, 
+            "subcategory": 1
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 5, 
+            "subcategory": null
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 7, 
+            "subcategory": null
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "features.classifiers", 
+        "fields": {
+            "category": 7, 
+            "subcategory": 2
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "features.since", 
+        "fields": {
+            "sinceid": 13
+        }
+    }
+]

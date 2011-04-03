@@ -45,8 +45,6 @@ class FeatureUploadForm(JsonMongoForm):
                                           choices=geometry_choices )
     geometry_coordinates = forms.CharField(label="Geometry Coordinates", 
                                            required=False)
-    feature_type = forms.TypedChoiceField(label="Properties Feature Type", 
-                                          choices=properties_feature_type_choices)
     
     classifiers = forms.TypedChoiceField(label="Classifiers", 
                                           choices=classifier_choices)
@@ -63,13 +61,10 @@ class FeatureUploadForm(JsonMongoForm):
                                                label="4th Level Boarder Code")
     level5_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                                label="5th Level Boarder Code")
-                                               
     time_begin = forms.DateTimeField(required=False)
     time_end = forms.DateTimeField(required=False)
-    
     centerpoint = forms.CharField(label="Centerpoint", required=False)
     subcategory = forms.CharField(max_length=300, label="Subcategory", required=False)
-    
     town = forms.CharField(max_length=300, label="Town", required=False)
     license = forms.CharField(max_length=300, label="License", required=False)
     abbr = forms.CharField(max_length=300, label="abbr", required=False)
@@ -129,9 +124,6 @@ class FeatureUpdateUploadForm(JsonMongoForm):
     geometry_coordinates = forms.CharField(label="Geometry Coordinates", 
                                            required=False)
     
-    feature_type = forms.TypedChoiceField(label="Properties Feature Type", 
-                                          choices=properties_feature_type_choices, required=False)
-    
     classifiers = forms.TypedChoiceField(label="Classifiers", choices=classifier_choices)
     country_code = forms.CharField(max_length=2, 
                                    label="2 Letter ISO Country Code",
@@ -146,13 +138,10 @@ class FeatureUpdateUploadForm(JsonMongoForm):
                                                label="4th Level Boarder Code")
     level5_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                                label="5th Level Boarder Code")
-                                               
     time_begin = forms.DateTimeField(required=False)
     time_end = forms.DateTimeField(required=False)
-    
     centerpoint = forms.CharField(label="Centerpoint", required=False)
     subcategory = forms.CharField(max_length=300, label="Subcategory", required=False)
-    
     town = forms.CharField(max_length=300, label="Town", required=False)
     license = forms.CharField(max_length=300, label="License", required=False)
     abbr = forms.CharField(max_length=300, label="abbr", required=False)
@@ -203,9 +192,6 @@ class FeatureEditUploadForm(JsonMongoForm):
                                           choices=geometry_choices, required=False )
     geometry_coordinates = forms.CharField(label="Geometry Coordinates", 
                                            required=False)
-    
-    feature_type = forms.TypedChoiceField(label="Properties Feature Type", 
-                                          choices=properties_feature_type_choices, required=False)
     
     classifiers = forms.TypedChoiceField(label="Classifiers", choices=classifier_choices)    
     

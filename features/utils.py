@@ -28,23 +28,23 @@ from georegistry.rest_mongo.utils import build_geohash_id, unflatten_geometry, u
 from georegistry.rest_mongo.utils import unflatten, raw_query_mongo_db, query_mongo_db 
 from georegistry.rest_mongo.views import get_document_by
 from pymongo.son import SON
-from georegistry.features.models import FacilityType
+from georegistry.features.models import ClassifierCategories
 
 def check_for_pos_dupes_via_geoloc(attrs, collection_name=None):
     if attrs['geometry_type']=="Point":
             ll = {'$near':[float(attrs['geometry_coordinates'][0]),
                            float(attrs['geometry_coordinates'][1] )]}
-            
-            ft= FacilityType.objects.get(slug=attrs['feature_type'])
-            
-            md={'$maxDistance': int(ft.duplicate_distance_tolerance)}
-            
+	    cc = ClassifierCategories.objects.get(slug=attrs['classifiers']['category'])
+            md={'$maxDistance': int(cc.duplicate_distance_tolerance)}
             q=SON(ll)
             q.update(md)
+
             gq={'geometry_coordinates': q,
-                'feature_type': attrs['feature_type']}
-            x=query_mongo_db(gq, collection_name=collection_name)
-            if x.has_key('features'):
+                'classifiers.category': attrs['classifiers']['category']}
+
+	    x=query_mongo_db(gq, collection_name=collection_name)
+
+	    if x.has_key('features'):
                 if len(x['features'])>0:
                     attrs['possible_duplicate']=True
     return attrs

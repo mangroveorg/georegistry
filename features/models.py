@@ -27,6 +27,7 @@ class ClassifierCategories(models.Model):
     type    = models.ForeignKey(ClassifierTypes)
     name    = models.CharField(max_length=75, unique=True)
     slug    = models.CharField(max_length=75, unique=True)    
+    duplicate_distance_tolerance= models.IntegerField(default=1)
     
     def __unicode__(self):
         return self.slug
@@ -74,18 +75,6 @@ class Classifiers(models.Model):
     def __to_json__(self):
         return json.dumps(self.__to_dict__())
 
-class FacilityType(models.Model):
-    class Meta:
-        verbose_name = __("FacilityType")
-        verbose_name_plural = __("FacilityTypes")
-        ordering = ('name',)
-
-    name = models.CharField(max_length=75, unique=True)
-    slug = models.CharField(max_length=75, unique=True)
-    duplicate_distance_tolerance= models.IntegerField(default=1)
-    
-    def __unicode__(self):
-        return self.name
 
 
 class Since(models.Model):
