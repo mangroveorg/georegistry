@@ -6,6 +6,7 @@
 
 {% block featureBox %}
     {% if not user.is_authenticated %}
+    
             {% if form.errors %}
                     <p class="error">Sorry, that's not a valid username or password</p>
             {% endif %}
@@ -18,32 +19,42 @@
                     <input type="submit" value="API Login" />
                     <input type="hidden" name="next" value="{{ next|escape }}" />
             </form>
-            
+     <br>       
     {% endif %}
     
 {% load media %}
  <img src="{% media_url %}/img/georegistry_logo.png"></img>
-
+<br> <br> 
 
     <h2>Introduction:</h2>
-    <p>Welcome to the Georegistry, the geospatial health index service developed
+    <br>
+    <p>Welcome to the Georegistry, the geospatial health repository developed
     by the <a HREF="http://www.earth.columbia.edu/"> 
-    Earth Institute </a> at Columbia University. What makes georegistry special is that it is deisgned
-    to build high-quality, vetted health information from multiple sources.
+    Earth Institute </a> at Columbia University. What makes Georegistry so special
+    is that it is deisgned specifically to result high-quality, vetted, health information
+    from multiple sources (mobile devices, spreadsheets, web sites, etc.).
+    In short, Georegistry makes it easy for govenments and NGOs to share, visualize,
+    and report information.</p>
+    <p>
     Georegistry provides a standardized way to collect and store health data
-    that is often kept in spreadsheets in incompatiable formats. To see a client example visit
+    that is too often kept in spreadsheets in incompatiable formats. To see a
+    client example visit
     <a HREF="http://www.georegistry.org">http://www.georegistry.org</a>. You can also 
     have a look at the <a HREF="http://readthedocs.org/docs/georegistry/latest/"> developer
     documentation</a>, or <a href="/accounts/register">request access</a> to the
-    application programming interface(API). Currently, we are only accepting input
+    application programming interface(API).
+    <p>
+    Currently, we are only accepting input
     from governments and NGOs sources for the following countries:
     <br></br>
     <ul>
     <li>Nigeria</li>
     <li>Ghana</li>
     </ul>
-<br>
+    </p>
+    <br> <br> 
     <h2>Georegistry Capabilities:</h2>
+    <br> 
     <ul>
     <li>Store and search multiple spellings or langauages for a single item</li>
     <li>Duplicate detection</li>
@@ -57,6 +68,7 @@
 		
   <br></br>      
 <h2>Developer Links:</h2>
+<br> 
 <ul>
 <li> <a href="/api/1.0/createfeature/">Example: Create a new feature in the Georegistry (API Account and permission required)</a> </li>
 <li> <a href="https://github.com/mangroveorg/georegistry_web/tree/master/data-import-tools">Import Tools</a> </li>
