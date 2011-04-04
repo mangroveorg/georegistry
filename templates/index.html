@@ -5,42 +5,64 @@
 {% endblock %}
 
 {% block featureBox %}
-
-    <h1>Welcome to the Georegistry API Web Service!</h1>
-    <p>Georegistry is a geospatial health information service. It is accessed
-    via a RESTful API and speaks GeoJSON.<p>
-		{% load media %}
-                <img src="{% media_url %}/img/Rsrch_HomeBanner_2.jpg"></img>
-                
-    
-    
     {% if not user.is_authenticated %}
             {% if form.errors %}
                     <p class="error">Sorry, that's not a valid username or password</p>
             {% endif %}
 
             <form action='/login/' method='POST'>
-                    <label for="username">User name:</label>
+                    <label for="username">User:</label>
                     <input type="text" name="username" value="" id="username">
-                    <br>
                     <label for="password">Password:</label>
                     <input type="password" name="password" value="" id="password">
-                    <br>
-                    <input type="submit" value="login" />
+                    <input type="submit" value="API Login" />
                     <input type="hidden" name="next" value="{{ next|escape }}" />
             </form>
-            Dont' have an account yet?  <a href="/accounts/register">Register here</a>
+            
     {% endif %}
-                
+    
+{% load media %}
+ <img src="{% media_url %}/img/georegistry_logo.png"></img>
 
 
-   <p>Get started by looking at the  <a HREF="https://github.com/mvpdev/georegistry/blob/master/docs/api-reference.rst">Online Documentation</a>.</p>
-
-<h1>Quick Links:</h1>
+    <h2>Introduction:</h2>
+    <p>Welcome to the Georegistry, the geospatial health index service developed
+    by the Earth Institute. What makes georegistry special is that it is deisgned
+    to build high-quality, vetted health information from multiple sources.
+    Georegistry provides a standardized way to collect and store health data
+    that is often kept in spreadsheets in incompatiable formats. To see a client example visit
+    <a HREF="http://www.georegistry.org">http://www.georegistry.org</a>. You can also 
+    have a look at the <a HREF="http://readthedocs.org/docs/georegistry/latest/"> developer
+    documentation</a>, or <a href="/accounts/register">request access</a> to the
+    application programming interface(API). Currently, we are only accepting input
+    from governments and NGOs sources for the following countries:
+    <br></br>
+    <ul>
+    <li>Nigeria</li>
+    <li>Ghana</li>
+    </ul>
+<br>
+    <h2>Georegistry Capabilities:</h2>
+    <ul>
+    <li>Store and search multiple spellings or langauages for a single item</li>
+    <li>Duplicate detection</li>
+    <li>Flag items as "offical" or government verified</li>
+    <li>Historical storage and search</li>
+    <li>Spreadsheet import tools data</li>
+    <li>Developer Friendly: RESTful API serving GeoJSON, open source, Client Examples with Source Code</li>
+    <li>Commect via mobile decvices, web, xforms, or other application</li>
+   </ul>
+    
+		
+  <br></br>      
+<h2>Developer Links:</h2>
 <ul>
-<li> <a href="/api/1.0/createfeature/">API: Create a new feature in the Georegistry</a> </li>
-<li> <a href="http://www.georegistry.org">Client Website (Reference Implementation Example)</a> </li>
+<li> <a href="/api/1.0/createfeature/">API: Create a new feature in the Georegistry (API Account and permission required)</a> </li>
+<li> <a href="https://github.com/mangroveorg/georegistry_web/tree/master/data-import-tools">Import Tools</a> </li>
+<li> <a href="https://github.com/mangroveorg/georegistry_web">Georegistry Client Website Source Code</a> </li>
+<li> <a href="https://github.com/mangroveorg/georegistry">Georegistry Server Website Source Code</a> </li>
 </ul>
-<p>Please pardon our mess.  This site is under construction!</p>
-
+<br></br>  <br></br>  
+    <img src="{% media_url %}/img/Rsrch_HomeBanner_2.jpg"></img>
+    <p>Please pardon our mess.  This site is still under construction. :-)</p>
 {% endblock %}
