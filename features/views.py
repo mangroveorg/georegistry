@@ -20,6 +20,7 @@ from pymongo.son import SON
 from georegistry.rest_mongo.views import create_document, update_document, edit_document, get_document_by
 
 from georegistry.accounts.decorators import json_login_required, access_required
+from simple_locations.models import Area
 
 @json_login_required
 def test_authorization(request):
@@ -286,3 +287,40 @@ def get_features_classifiers(request):
     for c in cl:
         l.append(c.__to_dict__())
     return HttpResponse(json.dumps(l, indent=4), status=200)
+
+#@json_login_required
+#@access_required("read_feature")   
+def get_features_countries(request):
+    """
+        Return a list of a coutries in areas.
+    """
+    l=[]
+    areas=Area.objects.all()
+    for a in areas:
+        if a.two_letter_iso_country_code not in l:
+            l.append(a.two_letter_iso_country_code)
+    return HttpResponse(json.dumps(l), status=200)
+
+#@json_login_required
+#@access_required("read_feature")
+def get_features_subdivisions(request):
+    """
+        Return a list of subdivisions in areas.
+    """
+    sd={}
+    c=[]
+    areas=Area.objects.all()
+    for a in areas:
+        if a.two_letter_iso_country_code not in c:
+            c.append(a.two_letter_iso_country_code)
+    
+    for i in c:    
+        sl=[]
+        subs=Area.objects.filter(two_letter_iso_country_code=i)
+        for s in subs:
+            if s not in sl:
+                if s.two_letter_iso_subdivision_code!="":
+                    sl.append(s.two_letter_iso_subdivision_code)
+        sd[i]=sl
+ 
+    return HttpResponse(json.dumps(sd), status=200)

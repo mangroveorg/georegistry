@@ -97,4 +97,7 @@ urlpatterns = patterns('',
     #get a list of all feature classifiers in the system. (returns a json list of feature classifiers)
     url(r'^api/1.0/features/classifiers$', get_features_classifiers, name="get_features_classifiers"),
     
+    url(r'^api/1.0/features/countries$', get_features_countries, name="get_features_countries"),
+    
+     url(r'^api/1.0/features/subdivisions$', get_features_subdivisions, name="get_features_subdivisions"),
 )
