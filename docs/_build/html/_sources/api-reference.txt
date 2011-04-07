@@ -138,9 +138,9 @@ Key:
 =========================================================================================== =========== =================================================== 
 BASE URL                                                                                    HTTP METHOD FUNCTION
 =========================================================================================== =========== ===================================================
-/api/1.0/feature/classifiers                                                                GET         Get the classifiers defined in the system in JSON
-/api/1.0/feature/countries                                                                  GET         Get the list of coutries in the system in JSON
-/api/1.0/feature/subdivisions                                                               GET         Get the list of subdivisions in the system in JSON
+/api/1.0/features/classifiers                                                                GET         Get the classifiers defined in the system in JSON
+/api/1.0/features/countries                                                                  GET         Get the list of coutries in the system in JSON
+/api/1.0/features/subdivisions                                                               GET         Get the list of subdivisions in the system in JSON
 =========================================================================================== =========== ===================================================
 
 
