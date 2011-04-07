@@ -94,6 +94,7 @@ urlpatterns = patterns('',
     #get all feautures in a polygon feature (returns a json list of feature_ids)
     url(r'^api/1.0/features/in-boundingbox/(?P<botleft_lon>[^/]+)/(?P<botleft_lat>[^/]+)/(?P<topright_lon>[^/]+)/(?P<topright_lat>[^/]+)$', get_features_in_boundingbox, name="get_features_in_boundingbox"),
 
-
-
+    #get a list of all feature classifiers in the system. (returns a json list of feature classifiers)
+    url(r'^api/1.0/features/classifiers$', get_features_classifiers, name="get_features_classifiers"),
+    
 )

@@ -275,4 +275,14 @@ def get_features_in_polygon(request, feature_id):
 def get_features_containing_point(request, lon, lat):
     return HttpResponse("Not implemented yet.")
 
-    
+#@json_login_required
+#@access_required("read_feature")
+def get_features_classifiers(request):
+    """
+        Return a list of a classifiers.
+    """
+    l=[]
+    cl=Classifiers.objects.all()
+    for c in cl:
+        l.append(c.__to_dict__())
+    return HttpResponse(json.dumps(l, indent=4), status=200)
