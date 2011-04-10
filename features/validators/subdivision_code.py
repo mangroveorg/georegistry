@@ -4,7 +4,7 @@
 
 from django.core.exceptions import ValidationError
 
-from simple_locations.models import Area
+from georegistry.simple_locations.models import Area
 
 def validate(s):
     """

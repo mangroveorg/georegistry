@@ -11,7 +11,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
-    (r'^simple-locations/', include('simple_locations.urls')),
+   # (r'^simple-locations/', include('georegistry.simple_locations.urls')),
    # (r'^xform_manager/', include('georegistry.xform_manager.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

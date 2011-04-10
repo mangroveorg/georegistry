@@ -20,7 +20,7 @@ from pymongo.son import SON
 from georegistry.rest_mongo.views import create_document, update_document, edit_document, get_document_by
 
 from georegistry.accounts.decorators import json_login_required, access_required
-from simple_locations.models import Area
+from georegistry.simple_locations.models import Area
 from django.core import serializers
 
 @json_login_required
