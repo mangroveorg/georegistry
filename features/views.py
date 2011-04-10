@@ -21,6 +21,7 @@ from georegistry.rest_mongo.views import create_document, update_document, edit_
 
 from georegistry.accounts.decorators import json_login_required, access_required
 from simple_locations.models import Area
+from django.core import serializers
 
 @json_login_required
 def test_authorization(request):
@@ -288,6 +289,59 @@ def get_features_classifiers(request):
         l.append(c.__to_dict__())
     return HttpResponse(json.dumps(l, indent=4), status=200)
 
+
+
+
+
+
+#@json_login_required
+#@access_required("read_feature")   
+def get_features_locations(request):
+    """
+        Return a list of a coutries in areas.
+    """
+    loc_tree={}
+    c=[]
+
+    areas=Area.objects.all()
+    for a in areas:
+        loc={}
+        loc={"name":a.name, "level":a.level, "slug":a.slug}
+
+        if a.level==0:
+            loc.update({"country_code":a.two_letter_iso_country_code,
+                        "parent":None, "children":[]})
+            loc_tree.update({a.slug:loc})
+            
+        elif a.level==1:
+            loc.update({"subdividion_code":a.two_letter_iso_subdivision_code,
+                "parent":a.parent.slug, "children":[]})
+        else:
+            loc.update({"parent":a.parent.slug, "children":[]})
+        
+        c.append(loc)
+    
+    nl=[]
+    for i in c:
+        nl.append(i)
+        if i['level']==1:
+            nl.pop()
+            if loc_tree.has_key(i['parent']):
+                #print loc_tree[i['parent']]
+                loc_tree[i['parent']]["children"].append(i)
+        
+                
+    for k in loc_tree.keys():
+        
+        if loc_tree[k]['children']:
+            for i in loc_tree[k]['children']:
+                for j in nl:
+                    if j['level']==2 and j['parent']==i['slug']:
+                        i['children'].append(j)
+        
+    
+    return HttpResponse(json.dumps(loc_tree, indent=4), status=200)
+
 #@json_login_required
 #@access_required("read_feature")   
 def get_features_countries(request):
@@ -307,6 +361,7 @@ def get_features_subdivisions(request):
     """
         Return a list of subdivisions in areas.
     """
+    
     sd={}
     c=[]
     areas=Area.objects.all()
