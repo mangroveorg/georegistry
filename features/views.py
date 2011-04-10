@@ -314,7 +314,7 @@ def get_features_locations(request):
             loc_tree.update({a.slug:loc})
             
         elif a.level==1:
-            loc.update({"subdividion_code":a.two_letter_iso_subdivision_code,
+            loc.update({"subdivision_code":a.two_letter_iso_subdivision_code,
                 "parent":a.parent.slug, "children":[]})
         else:
             loc.update({"parent":a.parent.slug, "children":[]})
