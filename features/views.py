@@ -354,11 +354,12 @@ def get_features_countries(request):
         Return a list of a coutries in areas.
     """
     l=[]
-    areas=Area.objects.all()
+    areas=Area.objects.filter(parent=None)
     for a in areas:
+        c={a.two_letter_iso_country_code: {'name':a.name, 'slug':a.slug}}
         if a.two_letter_iso_country_code not in l:
-            l.append(a.two_letter_iso_country_code)
-    return HttpResponse(json.dumps(l), status=200)
+            l.append(c)
+    return HttpResponse(json.dumps(l, indent=4), status=200)
 
 #@json_login_required
 #@access_required("read_feature")
