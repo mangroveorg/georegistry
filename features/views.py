@@ -290,20 +290,25 @@ def get_features_classifiers(request):
     return HttpResponse(json.dumps(l, indent=4), status=200)
 
 
-
-
-
-
 #@json_login_required
 #@access_required("read_feature")   
 def get_features_locations(request):
     """
         Return a list of a coutries in areas.
     """
+    
+    kwargs= dict(request.GET.items())
+    if kwargs.has_key('country_code'):
+        country_code=kwargs['country_code']
+    else:
+        country_code=None
     loc_tree={}
     c=[]
 
-    areas=Area.objects.all()
+    if country_code:
+        areas=Area.objects.filter(two_letter_iso_country_code=country_code)
+    else:
+        areas=Area.objects.all()
     for a in areas:
         loc={}
         loc={"name":a.name, "level":a.level, "slug":a.slug}
