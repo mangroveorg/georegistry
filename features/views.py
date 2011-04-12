@@ -15,7 +15,7 @@ from django.template import RequestContext
 from django.conf import settings
 from forms import *
 from django.views.decorators.csrf import csrf_exempt
-from utils import delete_from_mongo, raw_query_mongo_db
+from utils import delete_from_mongo, raw_query_mongo_db, raw_count_mongo_db
 from pymongo.son import SON
 from georegistry.rest_mongo.views import create_document, update_document, edit_document, get_document_by
 
@@ -221,6 +221,14 @@ def get_features_search_dict(request):
         Return a geographic features matching GET parameters.
     """
     return get_document_by(request, search_in=('get',))
+    
+def get_countfeatures_search_dict(request, collection_name=None):
+    """
+        Return a count of geographic features matching GET parameters.
+    """
+    kwargs =dict(request.GET.items())
+    r=raw_count_mongo_db(kwargs, collection_name=collection_name)
+    return HttpResponse(json.dumps(r, indent=4))
 
 
 #@json_login_required

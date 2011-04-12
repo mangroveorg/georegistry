@@ -25,7 +25,7 @@ top_level_fields=('total', 'status', 'geometry',)
 
 from georegistry.rest_mongo.utils import build_utcnow_epoch_timestamp, build_pretty_id
 from georegistry.rest_mongo.utils import build_geohash_id, unflatten_geometry, unflatten_properties
-from georegistry.rest_mongo.utils import unflatten, raw_query_mongo_db, query_mongo_db 
+from georegistry.rest_mongo.utils import unflatten, raw_query_mongo_db, raw_count_mongo_db, query_mongo_db 
 from georegistry.rest_mongo.views import get_document_by
 from pymongo.son import SON
 from georegistry.features.models import ClassifierCategories

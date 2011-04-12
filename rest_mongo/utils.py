@@ -178,8 +178,6 @@ def query_mongo_db(kwargs, limit=None, collection_name=None):
 
 
 def raw_query_mongo_db(kwargs, collection_name=None):
-    print collection_name
-    print kwargs
     #for key in kwargs:
     #    print "arg: %s: %s" % (key, kwargs[key])
 
@@ -205,8 +203,38 @@ def raw_query_mongo_db(kwargs, collection_name=None):
                 l.append(d)
             response_dict['results']=l
     except:
-        print "Error reading from Mongo"
-        print str(sys.exc_info())
+        #print "Error reading from Mongo"
+        #print str(sys.exc_info())
+        response_dict['status']=400
+        response_dict['type']="Error"
+        response_dict['message']=str(sys.exc_info())
+    return response_dict
+
+
+def raw_count_mongo_db(kwargs, collection_name=None):
+    #for key in kwargs:
+    #    print "arg: %s: %s" % (key, kwargs[key])
+
+    """return a result list or an empty list"""
+    l=[]
+    response_dict={}
+    
+    try:
+        mconnection =  Connection(settings.MONGO_HOST, settings.MONGO_PORT)
+        db = 	   mconnection[settings.MONGO_DB_NAME]
+        if not collection_name:
+            transactions = db[settings.MONGO_DB_NAME]
+        elif (collection_name=="history"):
+            transactions = db[settings.MONGO_HISTORYDB_NAME]
+        elif (collection_name=="verified"):
+            transactions = db[settings.MONGO_VERIFIEDDB_NAME]
+        
+        mysearchresult=transactions.find(kwargs)
+        response_dict['status']=200
+        response_dict['count']=mysearchresult.count()
+    except:
+        #print "Error reading from Mongo"
+        #print str(sys.exc_info())
         response_dict['status']=400
         response_dict['type']="Error"
         response_dict['message']=str(sys.exc_info())

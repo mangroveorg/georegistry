@@ -63,13 +63,13 @@ class Classifiers(models.Model):
     
     def __to_dict__(self):
         if self.subcategory:
-            d={"type": self.category.type.slug,
-                "category": self.category.slug,
-                "subcategory": self.subcategory.slug}
+            d={"type":          self.category.type.slug,
+                "category":     self.category.slug,
+                "subcategory":  self.subcategory.slug}
         else:
-            d={"type": self.category.slug,
-                "category": self.category.slug,
-                "subcategory": ""}
+            d={"type":          self.category.type.slug,
+               "category":      self.category.slug,
+               "subcategory":   ""}
         return d
     
     def __to_json__(self):
@@ -90,11 +90,10 @@ geometry_choices =(
                 ('Polygon','Polygon'),
              )
 
-forbidden_system_fields =('tr_status','tr_validity')
+forbidden_system_fields =('gr_status','gr_validity')
 
 tr_status_fields =('latest','depricated')
 
-tr_validity_fields=('tr_status','tr_validity')
 
 status_choices=(('Latest', 'Latest'),('Depricated', 'Depricated'))
             
@@ -103,7 +102,6 @@ geometry_choices_tuple =('Point','LineString','Polygon')
 
 validity_choices=(('Unconfirmed','Unconfirmed'),('Validated', 'Validated'))
 
-status_choices=(('Latest', 'Latest'),('Depricated', 'Depricated'))
 
 
 # Create your models here.

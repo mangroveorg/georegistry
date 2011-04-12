@@ -15,7 +15,7 @@ urlpatterns = patterns('',
    # (r'^xform_manager/', include('georegistry.xform_manager.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 
     # Uncomment the next line to enable the admin:
@@ -40,6 +40,9 @@ urlpatterns = patterns('',
     
     
     url(r'^api/1.0/testlogin/$', test_authorization, name="test_authorization"),
+    
+    
+    (r'^api/1.0/counters/', include('georegistry.counters.urls')),
     
     #create a new feature
     url(r'^api/1.0/createfeature/$', create_feature, name="create_feature"),
@@ -77,6 +80,9 @@ urlpatterns = patterns('',
     #get all features that match the search dict (returns a json list of feature_ids)
     url(r'^api/1.0/features/search$', get_features_search_dict, name="get_features_search_dict"),
     
+    
+    #get all features that match the search dict (returns a json list of feature_ids)
+    url(r'^api/1.0/features/count$', get_countfeatures_search_dict, name="get_countfeatures_search_dict"),
     
     #get all features at a lon/lat point
     url(r'^api/1.0/features/at-point/(?P<lat>[^/]+)/(?P<lon>[^/]+)$', get_features_at_point, name="get_features_at_point"),
