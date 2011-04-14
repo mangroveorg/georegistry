@@ -147,7 +147,7 @@ BASE URL                                                                        
 /api/1.0/counters/cached-country/<country_code>                                             GET         Get the cached count total of country_code features in JSON
 /api/1.0/counters/cached-classifier/<classifer_level>/<classifier_slug>                     GET         Get the cached count total for a classifer in JSON. See classifers in the admin for potential values
 /api/1.0/counters/build-cached-total                                                        GET         Generate a new cached count for a classifer in JSON
-/api/1.0/counters/build-cached-country/(?P<country_code>[^/]+)                              GET         Generate a new cached count for a specific country_code  in JSON
+/api/1.0/counters/build-cached-country/<country_code>                                       GET         Generate a new cached count for a specific country_code  in JSON
 /api/1.0/counters/build-cached-classifier/<classifer_level>/<classifier_slug>               GET         Generate a new cached count for a classifer  in JSON. See classifers in the admin for potential values
 =========================================================================================== =========== ==================================================================================================================== 
 
