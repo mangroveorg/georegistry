@@ -31,4 +31,4 @@ class ClassifierCategoryFeaturesCounter(models.Model):
     count      = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return '%s=%s' % (self.classifer_category, self.count)
+        return '%s=%s' % (self.classifier_category, self.count)

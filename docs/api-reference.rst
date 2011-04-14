@@ -116,7 +116,8 @@ BASE URL                                                                        
 /api/1.0/feature/<feature_id>.png                                                           GET         Get the QR for a feature
 /api/1.0/feature/<feature_id>@<epoch>.json                                                  GET         Get the GeoJSON Code for a feature at a particular epoch (timestamp)
 /api/1.0/feature/<feature_id>@<epoch>.png                                                   GET         Get the QR for a feature at a particular epoch (timestamp)
-/api/1.0/features/search?<some GET query string>                                            GET         Get all features that match the search dict passed in.
+/api/1.0/features/search?<some GET query string>                                            GET         Get features that match the search dict passed in.
+/api/1.0/features/count?<some GET query string>                                             GET         Gat a count of features that match the search dict passed in.
 /api/1.0/features/country/<country_code>[-subdivision_code].json                            GET         Get all features with a particular country and or subdivision code (ISO 3166-1) eg. GH or GH-AH            
 /api/1.0/features/at-point/<lat>/<lon>/                                                     GET         Get all point features at a specific lat/long point
 /api/1.0/features/near-point/<lat>/<lon>/<limit>/<distance>                                 GET         Get all features near a specific lat/long point
@@ -135,13 +136,19 @@ Key:
 
 [] = optional
 
-=========================================================================================== =========== =================================================== 
+=========================================================================================== =========== ==================================================================================================================== 
 BASE URL                                                                                    HTTP METHOD FUNCTION
-=========================================================================================== =========== ===================================================
+=========================================================================================== =========== ==================================================================================================================== 
 /api/1.0/features/classifiers                                                               GET         Get the classifiers defined in the system in JSON
 /api/1.0/features/countries                                                                 GET         Get the list of coutries in the system in JSON
 /api/1.0/features/subdivisions                                                              GET         Get the list of subdivisions in the system in JSON
 /api/1.0/features/locations                                                                 GET         Get the list of top 3 locations in the system in JSON
-=========================================================================================== =========== ===================================================
+/api/1.0/counters/cached-total                                                              GET         Get the cached count total of all features in JSON
+/api/1.0/counters/cached-country/<country_code>                                             GET         Get the cached count total of country_code features in JSON
+/api/1.0/counters/cached-classifier/<classifer_level>/<classifier_slug>                     GET         Get the cached count total for a classifer in JSON. See classifers in the admin for potential values
+/api/1.0/counters/build-cached-total                                                        GET         Generate a new cached count for a classifer in JSON
+/api/1.0/counters/build-cached-country/(?P<country_code>[^/]+)                              GET         Generate a new cached count for a specific country_code  in JSON
+/api/1.0/counters/build-cached-classifier/<classifer_level>/<classifier_slug>               GET         Generate a new cached count for a classifer  in JSON. See classifers in the admin for potential values
+=========================================================================================== =========== ==================================================================================================================== 
 
 
