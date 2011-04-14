@@ -186,7 +186,11 @@ the resource).  You need a username and password to access to authenticate.</p>
 </tr>
 <tr><td>/api/1.0/features/search?&lt;some GET query string&gt;</td>
 <td>GET</td>
-<td>Get all features that match the search dict passed in.</td>
+<td>Get features that match the search dict passed in.</td>
+</tr>
+<tr><td>/api/1.0/features/count?&lt;some GET query string&gt;</td>
+<td>GET</td>
+<td>Gat a count of features that match the search dict passed in.</td>
 </tr>
 <tr><td>/api/1.0/features/country/&lt;country_code&gt;[-subdivision_code].json</td>
 <td>GET</td>
@@ -222,9 +226,9 @@ the resource).  You need a username and password to access to authenticate.</p>
 <p>[] = optional</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="59%" />
-<col width="7%" />
-<col width="33%" />
+<col width="42%" />
+<col width="5%" />
+<col width="53%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head">BASE URL</th>
@@ -244,6 +248,34 @@ the resource).  You need a username and password to access to authenticate.</p>
 <tr><td>/api/1.0/features/subdivisions</td>
 <td>GET</td>
 <td>Get the list of subdivisions in the system in JSON</td>
+</tr>
+<tr><td>/api/1.0/features/locations</td>
+<td>GET</td>
+<td>Get the list of top 3 locations in the system in JSON</td>
+</tr>
+<tr><td>/api/1.0/counters/cached-total</td>
+<td>GET</td>
+<td>Get the cached count total of all features in JSON</td>
+</tr>
+<tr><td>/api/1.0/counters/cached-country/&lt;country_code&gt;</td>
+<td>GET</td>
+<td>Get the cached count total of country_code features in JSON</td>
+</tr>
+<tr><td>/api/1.0/counters/cached-classifier/&lt;classifer_level&gt;/&lt;classifier_slug&gt;</td>
+<td>GET</td>
+<td>Get the cached count total for a classifer in JSON. See classifers in the admin for potential values</td>
+</tr>
+<tr><td>/api/1.0/counters/build-cached-total</td>
+<td>GET</td>
+<td>Generate a new cached count for a classifer in JSON</td>
+</tr>
+<tr><td>/api/1.0/counters/build-cached-country/(?P&lt;country_code&gt;[^/]+)</td>
+<td>GET</td>
+<td>Generate a new cached count for a specific country_code  in JSON</td>
+</tr>
+<tr><td>/api/1.0/counters/build-cached-classifier/&lt;classifer_level&gt;/&lt;classifier_slug&gt;</td>
+<td>GET</td>
+<td>Generate a new cached count for a classifer  in JSON. See classifers in the admin for potential values</td>
 </tr>
 </tbody>
 </table>
