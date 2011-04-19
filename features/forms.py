@@ -54,7 +54,8 @@ class FeatureUploadForm(JsonMongoForm):
                                    validators=[country_code.validate])
     subdivision_code = forms.CharField(max_length=2, 
                                        label="ISO Subdivision Code (Level 1)",
-                                       validators=[subdivision_code.validate])
+                                       #validators=[subdivision_code.validate]
+                                       )
     level2_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                               label="3rd Level Boarder Code")
     level3_admin_boarder_code = forms.CharField(max_length=50, required=False, 
