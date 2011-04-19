@@ -126,8 +126,8 @@ BASE URL                                                                        
 /api/1.0/history/feature/<feature_id>.json                                                  GET         Get the GeoJSON for a historical feature  (historical= a feature that has been suplanted by a newer version)
 =========================================================================================== =========== ====================================================================================================================
 
-1.5 Other API Methods:
-----------------------
+1.5 Metadata API Methods:
+-------------------------
 
 Key:
 
@@ -151,4 +151,17 @@ BASE URL                                                                        
 /api/1.0/counters/build-cached-classifier/<classifer_level>/<classifier_slug>               GET         Generate a new cached count for a classifer  in JSON. See classifers in the admin for potential values
 =========================================================================================== =========== ==================================================================================================================== 
 
+1.5 Maintenace API Methods:
+----------------------------
+Key:
 
+<> = required
+
+[] = optional
+
+=========================================================================================== =========== ==================================================================================================================== 
+BASE URL                                                                                    HTTP METHOD FUNCTION
+=========================================================================================== =========== ==================================================================================================================== 
+/maintenance/load_countries_into_simple_locations                                           GET         Loads All country data into simplelocations.
+/maintenance/<level>/import-shapefile-to-simple-locations                                   GET/POST    Upload a dbf file either admin level 1 or 2 only and import it into simple_locations.
+=========================================================================================== =========== ====================================================================================================================
