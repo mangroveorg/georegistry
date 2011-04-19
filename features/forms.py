@@ -50,16 +50,16 @@ class FeatureUploadForm(JsonMongoForm):
                                           choices=classifier_choices)
     
     country_code = forms.CharField(max_length=2, 
-                                   label="2 Letter ISO Country Code",
+                                   label="2 Letter ISO Country Code (Level 0)",
                                    validators=[country_code.validate])
     subdivision_code = forms.CharField(max_length=2, 
-                                       label="ISO Subdivision Code",
+                                       label="ISO Subdivision Code (Level 1)",
                                        validators=[subdivision_code.validate])
-    level3_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+    level2_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                               label="3rd Level Boarder Code")
-    level4_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+    level3_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                                label="4th Level Boarder Code")
-    level5_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+    level4_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                                label="5th Level Boarder Code")
     time_begin = forms.DateTimeField(required=False)
     time_end = forms.DateTimeField(required=False)
@@ -126,17 +126,16 @@ class FeatureUpdateUploadForm(JsonMongoForm):
     
     classifiers = forms.TypedChoiceField(label="Classifiers", choices=classifier_choices)
     country_code = forms.CharField(max_length=2, 
-                                   label="2 Letter ISO Country Code",
-                                   validators=[country_code.validate], required=False)
+                                   label="2 Letter ISO Country Code (Level 0)",
+                                   validators=[country_code.validate])
     subdivision_code = forms.CharField(max_length=2, 
-                                       label="ISO Subdivision Code",
-                                       validators=[subdivision_code.validate], required=False)
-    
-    level3_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+                                       label="ISO Subdivision Code (Level 1)",
+                                       validators=[subdivision_code.validate])
+    level2_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                               label="3rd Level Boarder Code")
-    level4_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+    level3_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                                label="4th Level Boarder Code")
-    level5_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+    level4_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                                label="5th Level Boarder Code")
     time_begin = forms.DateTimeField(required=False)
     time_end = forms.DateTimeField(required=False)
@@ -195,21 +194,18 @@ class FeatureEditUploadForm(JsonMongoForm):
     
     classifiers = forms.TypedChoiceField(label="Classifiers", choices=classifier_choices)    
     
-    
     country_code = forms.CharField(max_length=2, 
-                                   label="2 Letter ISO Country Code",
-                                   validators=[country_code.validate], required=False)
+                                   label="2 Letter ISO Country Code (Level 0)",
+                                   validators=[country_code.validate])
     subdivision_code = forms.CharField(max_length=2, 
-                                       label="ISO Subdivision Code",
-                                       validators=[subdivision_code.validate], required=False)
-    
-    level3_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+                                       label="ISO Subdivision Code (Level 1)",
+                                       validators=[subdivision_code.validate])
+    level2_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                               label="3rd Level Boarder Code")
-    level4_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+    level3_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                                label="4th Level Boarder Code")
-    level5_admin_boarder_code = forms.CharField(max_length=50, required=False, 
+    level4_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                                label="5th Level Boarder Code")
-                                               
     time_begin = forms.DateTimeField(required=False)
     time_end = forms.DateTimeField(required=False)
     

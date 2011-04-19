@@ -2,6 +2,7 @@ from django.conf.urls.defaults import *
 from georegistry.features.views import *
 from django.views.generic.simple import direct_to_template
 from georegistry.accounts.forms import RegistrationForm
+from georegistry.maintenance.views import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import login, logout, logout_then_login, password_change
 from django.conf import settings
@@ -108,4 +109,14 @@ urlpatterns = patterns('',
     url(r'^api/1.0/features/subdivisions$', get_features_subdivisions, name="get_features_subdivisions"),
     
     url(r'^api/1.0/features/locations$', get_features_locations, name="get_features_locations"),
+    
+    url(r'^maintenance/(?P<level>[^/]+)/import-shapefile-to-simple-locations/$',
+        import_shapefile_to_simple_locations,
+        name="import_shapefile_to_simple_locations"),
+    
+    
+    url(r'^maintenance/load_countries_into_simple_locations$',
+        load_countries_into_simple_locations,
+        name="load_countries_into_simple_locations"),
+    
 )
