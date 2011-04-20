@@ -22,6 +22,7 @@ from georegistry.rest_mongo.views import create_document, update_document, edit_
 from georegistry.accounts.decorators import json_login_required, access_required
 from georegistry.simple_locations.models import Area
 from django.core import serializers
+from operator import itemgetter, attrgetter
 
 @json_login_required
 def test_authorization(request):
@@ -364,32 +365,10 @@ def get_features_countries(request):
     l=[]
     areas=Area.objects.filter(parent=None)
     for a in areas:
-        c={a.two_letter_iso_country_code: {'name':a.name, 'slug':a.slug}}
-        if a.two_letter_iso_country_code not in l:
-            l.append(c)
+        c={'name':a.name, 'slug':a.slug,
+           'country_code': a.two_letter_iso_country_code}
+        l.append(c)
+    l=sorted(l, key=itemgetter('slug'))
     return HttpResponse(json.dumps(l, indent=4), status=200)
 
-#@json_login_required
-#@access_required("read_feature")
-def get_features_subdivisions(request):
-    """
-        Return a list of subdivisions in areas.
-    """
-    
-    sd={}
-    c=[]
-    areas=Area.objects.all()
-    for a in areas:
-        if a.two_letter_iso_country_code not in c:
-            c.append(a.two_letter_iso_country_code)
-    
-    for i in c:    
-        sl=[]
-        subs=Area.objects.filter(two_letter_iso_country_code=i)
-        for s in subs:
-            if s not in sl:
-                if s.two_letter_iso_subdivision_code!="":
-                    sl.append(s.two_letter_iso_subdivision_code)
-        sd[i]=sl
- 
-    return HttpResponse(json.dumps(sd), status=200)
+

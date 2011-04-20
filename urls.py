@@ -106,7 +106,6 @@ urlpatterns = patterns('',
     
     url(r'^api/1.0/features/countries$', get_features_countries, name="get_features_countries"),
     
-    url(r'^api/1.0/features/subdivisions$', get_features_subdivisions, name="get_features_subdivisions"),
     
     url(r'^api/1.0/features/locations$', get_features_locations, name="get_features_locations"),
     
