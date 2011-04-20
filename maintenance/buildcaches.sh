@@ -1,0 +1,13 @@
+curl http://api.georegistry.org/api/1.0/counters/build-cached-total
+curl http://api.georegistry.org/api/1.0/counters/build-cached-country/US
+curl http://api.georegistry.org/api/1.0/counters/build-cached-country/IN
+curl http://api.georegistry.org/api/1.0/counters/build-cached-country/GR
+curl http://api.georegistry.org/api/1.0/counters/build-cached-country/NG
+curl http://api.georegistry.org/api/1.0/counters/build-cached-country/NI
+curl http://api.georegistry.org/api/1.0/counters/build-cached-country/MG
+curl http://api.georegistry.org/api/1.0/counters/build-cached-classifier/category/city
+curl http://api.georegistry.org/api/1.0/counters/build-cached-classifier/category/water-point
+curl http://api.georegistry.org/api/1.0/counters/build-cached-classifier/category/primary-school
+curl http://api.georegistry.org/api/1.0/counters/build-cached-classifier/category/secondary-school
+curl http://api.georegistry.org/api/1.0/counters/build-cached-classifier/category/hospital
+curl http://api.georegistry.org/api/1.0/counters/build-cached-classifier/category/clinic
