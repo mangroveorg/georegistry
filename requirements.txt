@@ -2,6 +2,7 @@
 -e git+https://github.com/django-mptt/django-mptt.git#egg=mptt
 -e git+https://github.com/aviars/django-registration.git#egg=django-registration
 -e git+https://github.com/sunlightlabs/django-mediasync.git#egg=django-mediasync
+-e git+https://github.com/zacharyvoase/slugify.git#egg=slugify
 qrencode
 pymongo
 pytz
