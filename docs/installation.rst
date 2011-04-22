@@ -59,10 +59,13 @@ Create the necessary indecies. Do this for your main, historical, and verified
 collections.  These should correspond to the values in the settings.py file
 which is part of the Georegistry Django application.
 ::
-    db.places.ensureIndex( { loc : "2d" } )
+    db.geometry_coordinates.ensureIndex( { loc : "2d" } )
     db.<collection_name>.ensureIndex( { geometry_coordinates : "2d" } )
     db.<collection_name>.ensureIndex( { 'country_code' : 1 } )
     db.<collection_name>.ensureIndex( { 'id' : 1 } )
+    db.<collection_name>.ensureIndex( { 'classifiers.subcategory' : 1 } );
+    db.<collection_name>.ensureIndex( { 'classifiers.category' : 1 } );
+    db.<collection_name>.ensureIndex( { 'classifiers.type' : 1 } );
 
 Just as an FYI, here is how to display everything in the collection as JSON.
 ::
@@ -89,7 +92,7 @@ Setup on Ubuntu 10.10:
 Grab the necessary prerequisite Ubuntu packages
 ::
     sudo apt-get update
-    sudo apt-get install python-imaging git-core mercurlial build-essental python2.6-dev python-setuptools libdecodeqr0 libdecodeqr-dev libqrencode3 libqrencode-dev
+    sudo apt-get install python-imaging git-core build-essental python2.6-dev python-setuptools libdecodeqr0 libdecodeqr-dev libqrencode3 libqrencode-dev
     sudo easy_install pip
 
 Install Django 1.3
@@ -116,3 +119,15 @@ Run the development server:
 
 Now that you have the server running in a develoment environment.  See
 georegistry/apache/READE.rst for instructions to congigure the application with Apache2.
+
+Notes for Max OSX Users:
+------------------------
+
+These tips may help setup qrencode, whih requires some C libraries.
+::
+    brew install qrencode
+    env DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH ARCHFLAGS="-arch x86_64" pip install -r requirements.txt
+or
+::
+    brew install qrencode
+    pip install -r requirements.txt

@@ -95,10 +95,13 @@ use georegistry02;</pre>
 <p>Create the necessary indecies. Do this for your main, historical, and verified
 collections.  These should correspond to the values in the settings.py file
 which is part of the Georegistry Django application.</p>
-<div class="highlight-python"><pre>db.places.ensureIndex( { loc : "2d" } )
+<div class="highlight-python"><pre>db.geometry_coordinates.ensureIndex( { loc : "2d" } )
 db.&lt;collection_name&gt;.ensureIndex( { geometry_coordinates : "2d" } )
 db.&lt;collection_name&gt;.ensureIndex( { 'country_code' : 1 } )
-db.&lt;collection_name&gt;.ensureIndex( { 'id' : 1 } )</pre>
+db.&lt;collection_name&gt;.ensureIndex( { 'id' : 1 } )
+db.&lt;collection_name&gt;.ensureIndex( { 'classifiers.subcategory' : 1 } );
+db.&lt;collection_name&gt;.ensureIndex( { 'classifiers.category' : 1 } );
+db.&lt;collection_name&gt;.ensureIndex( { 'classifiers.type' : 1 } );</pre>
 </div>
 <p>Just as an FYI, here is how to display everything in the collection as JSON.</p>
 <div class="highlight-python"><pre>db.&lt;collection_name&gt;.find().forEach(printjson);</pre>
@@ -119,7 +122,7 @@ Linux/Unix.</p>
 <h2>Setup on Ubuntu 10.10:<a class="headerlink" href="#setup-on-ubuntu-10-10" title="Permalink to this headline">¶</a></h2>
 <p>Grab the necessary prerequisite Ubuntu packages</p>
 <div class="highlight-python"><pre>sudo apt-get update
-sudo apt-get install python-imaging git-core mercurlial build-essental python2.6-dev python-setuptools libdecodeqr0 libdecodeqr-dev libqrencode3 libqrencode-dev
+sudo apt-get install python-imaging git-core build-essental python2.6-dev python-setuptools libdecodeqr0 libdecodeqr-dev libqrencode3 libqrencode-dev
 sudo easy_install pip</pre>
 </div>
 <p>Install Django 1.3</p>
@@ -141,6 +144,19 @@ cd georegistry</pre>
 <p>Now that you have the server running in a develoment environment.  See
 georegistry/apache/READE.rst for instructions to congigure the application with Apache2.</p>
 </div>
+<div class="section" id="notes-for-max-osx-users">
+<h2>Notes for Max OSX Users:<a class="headerlink" href="#notes-for-max-osx-users" title="Permalink to this headline">¶</a></h2>
+<p>These tips may help setup qrencode, whih requires some C libraries.</p>
+<div class="highlight-python"><pre>brew install qrencode
+env DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH ARCHFLAGS="-arch x86_64" pip install -r requirements.txt</pre>
+</div>
+<div class="section" id="or">
+<h3>or<a class="headerlink" href="#or" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>brew install qrencode
+pip install -r requirements.txt</div></blockquote>
+</div>
+</div>
 </div>
 
 
@@ -159,6 +175,10 @@ georegistry/apache/READE.rst for instructions to congigure the application with 
 </li>
 <li><a class="reference internal" href="#install-prerequisites-for-georegistry">Install prerequisites for Georegistry:</a><ul>
 <li><a class="reference internal" href="#setup-on-ubuntu-10-10">Setup on Ubuntu 10.10:</a></li>
+<li><a class="reference internal" href="#notes-for-max-osx-users">Notes for Max OSX Users:</a><ul>
+<li><a class="reference internal" href="#or">or</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
