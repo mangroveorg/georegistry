@@ -168,6 +168,8 @@ def query_mongo_db(kwargs, limit=None, collection_name=None):
                         response_dict['features'].append(d)
                         d['type']="Feature"
                 response_dict['total']=len(response_dict['features'])
+                if response_dict['total']==0:
+                    response_dict['message']="No results were found."
     except:
         print "Error reading from Mongo"
         print str(sys.exc_info())

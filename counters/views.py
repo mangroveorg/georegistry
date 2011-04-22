@@ -68,7 +68,7 @@ def build_allfeature_counter(request, collection_name=None):
         fc.count=int(r['count'])
         fc.save()
     except(AllFeaturesCounter.DoesNotExist):
-        fc=AllFeaturesCounter.objects.create(counter=int(r['count']))
+        fc=AllFeaturesCounter.objects.create(count=int(r['count']))
         fc.save()
     
     return HttpResponse(json.dumps(r,indent=4))
