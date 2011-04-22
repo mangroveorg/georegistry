@@ -55,7 +55,7 @@ def update_document(request, feature_id,
                                     or a Python dict. Default is True.
     """
  
-    # Feature exists or 404
+    # Feature exists?
     responsedict = query_mongo_db({"id": feature_id})
     
     if responsedict['status'] != 200:

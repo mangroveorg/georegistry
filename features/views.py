@@ -53,7 +53,7 @@ def create_feature(request):
 @access_required("delete_feature")
 def delete_feature(request):
     """
-        Update a geographic feature and save changes in Mongo DB.
+        Delete a geographic feature and save changes in Mongo DB.
         
         If the feature doesn't exits, return a 404 error.
     """
