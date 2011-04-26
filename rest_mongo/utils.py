@@ -82,7 +82,7 @@ def query_mongo_db(kwargs, limit=None, collection_name=None):
         limit=int(limit)
     features=[]
     search_list=False
-    response_dict={'status': 200,
+    response_dict={'status': 404,
                    'type': 'FeatureCollection',
                    'features': features,
                    'total': 0
