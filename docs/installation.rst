@@ -81,7 +81,7 @@ For example, you could install python-imaging with pip, by typing:
 ::
     sudo pip install PIL
  
-...or you could install it via a Linux distrobution package such as Ubuntu 10.10
+...or you could install it via a Linux distribution package such as Ubuntu 10.10
 ::
     sudo apt-get install python-imaging
 
