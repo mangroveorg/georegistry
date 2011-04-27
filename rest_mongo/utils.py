@@ -73,13 +73,15 @@ def query_mongo_db_forms(kwargs, collection_name=None):
 #if not in this list then we should pack it into properties or geometry
 top_level_fields=('total', 'status', 'geometry',)
 feature_level_fields=('id', 'epoch', 'sinceid', '_id', '')
-def query_mongo_db(kwargs, limit=None, collection_name=None):
+def query_mongo_db(kwargs, limit=None, skip=0, collection_name=None):
     """
     query mongo and unflatten the results so its pretty json
     """
     """return a result list or an empty list"""
     if limit:
         limit=int(limit)
+    if skip:
+        skip=int(skip)
     features=[]
     search_list=False
     response_dict={'status': 404,
@@ -122,8 +124,10 @@ def query_mongo_db(kwargs, limit=None, collection_name=None):
                         d=unflatten(d)
                         response_dict['features'].append(d)
                         d['type']="Feature"
-            if limit:            
+            if limit and skip==0:            
                 mysearchresult=transactions.find(kwargs).limit(limit)    
+            elif limit and skip>0:
+                mysearchresult=transactions.find(kwargs).skip(skip).limit(limit) 
             else:
                 mysearchresult=transactions.find(kwargs)
             mysearchcount=mysearchresult.count()
