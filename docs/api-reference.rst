@@ -73,7 +73,7 @@ The above query return a GeoJSON object which may look something like ....
 
  
 1.3 API Methods for Manipulating Features:
----------------------------------------------------
+-------------------------------------------
 
 Key:
 
@@ -116,9 +116,9 @@ BASE URL                                                                        
 /api/1.0/feature/<feature_id>.png                                                           GET         Get the QR for a feature
 /api/1.0/feature/<feature_id>@<epoch>.json                                                  GET         Get the GeoJSON Code for a feature at a particular epoch (timestamp)
 /api/1.0/feature/<feature_id>@<epoch>.png                                                   GET         Get the QR for a feature at a particular epoch (timestamp)
-/api/1.0/features/search?<some GET query string>                                            GET         Get features that match the search dict passed in.
+/api/1.0/features/search?<some GET query string>[&limit=a][&skip=b]                         GET         Get features that match the search dict passed in.
 /api/1.0/features/count?<some GET query string>                                             GET         Gat a count of features that match the search dict passed in.
-/api/1.0/features/country/<country_code>[-subdivision_code].json                            GET         Get all features with a particular country and or subdivision code (ISO 3166-1) eg. GH or GH-AH            
+/api/1.0/features/country/<country_code>[-subdivision_code].json[?&limit=a][&skip=b]        GET         GET         Get all features with a particular country and or subdivision code (ISO 3166-1) eg. GH or GH-AH            
 /api/1.0/features/at-point/<lat>/<lon>/                                                     GET         Get all point features at a specific lat/long point
 /api/1.0/features/near-point/<lat>/<lon>/<limit>/<distance>                                 GET         Get all features near a specific lat/long point
 /api/1.0/features/containing-point/<lat>/<lon>/                                             GET         Get all features containing a specific lat/long point with a limit of <limit> and a max distance of <max_distance>         
