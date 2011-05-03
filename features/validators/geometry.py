@@ -34,7 +34,7 @@ def validate(geometry_coordinates, geometry_type):
     
     if geometry_type == "Polygon":
         if len(l) < 3:
-            raise ValidationError("A polygon must have at least 3 coordinates.")
+            raise ValidationError("A Polygon must have at least 3 coordinates.")
         try:
             for i in l:
                 lon = float(i[0])
@@ -45,8 +45,8 @@ def validate(geometry_coordinates, geometry_type):
             raise ValidationError("lon/lat were not valid values.")
         
     if geometry_type == "LineString":
-        if len(l) <= 2:
-            raise ValidationError("A linestring must have 2 or more coordinates.")
+        if len(l) < 2:
+            raise ValidationError("A Linestring must have 2 or more coordinates.")
         try:
             for i in l:
                 lon = float(i[0])
