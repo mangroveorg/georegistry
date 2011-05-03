@@ -4,6 +4,7 @@
 import uuid
 import datetime, time
 import sys
+from shapely.geometry import Point, Polygon, LineString
 
 try:
     import json
@@ -32,14 +33,14 @@ from georegistry.features.models import ClassifierCategories
 
 def check_for_pos_dupes_via_geoloc(attrs, collection_name=None):
     if attrs['geometry_type']=="Point":
-            ll = {'$near':[float(attrs['geometry_coordinates'][0]),
-                           float(attrs['geometry_coordinates'][1] )]}
+            ll = {'$near':[float(attrs['geometry_centroid'][0]),
+                           float(attrs['geometry_centroid'][1] )]}
 	    cc = ClassifierCategories.objects.get(slug=attrs['classifiers']['category'])
             md={'$maxDistance': int(cc.duplicate_distance_tolerance)}
             q=SON(ll)
             q.update(md)
 
-            gq={'geometry_coordinates': q,
+            gq={'geometry_centroid': q,
                 'classifiers.category': attrs['classifiers']['category']}
 
 	    x=query_mongo_db(gq, collection_name=collection_name)
@@ -81,37 +82,75 @@ def delete_from_mongo(tr_id, collection_name=None):
 
 def save_to_mongo(attrs, tr_id=None, collection_name=None):
     """returns the saved object or an empty list"""
+    
     result_list=[]
+    
+    
+    #turn our classifier string into a python dict
+    p=str(attrs['classifiers']).split(".")
+    
+    print p
+    print len(p)
+    if len(p)==2:
+	attrs['classifiers']={"type":p[0], "category":p[1], "subcategory":""}
+    if len(p)==3:
+	attrs['classifiers']={"type":p[0], "category":p[1], "subcategory":p[2]}
+    attrs['classifiers']=json.dumps(attrs['classifiers'])
+    """
+    Make sure  the a single 2d index exists in geometry_centroid
+    """
+    """Make sure out coordinates are a list, not a string """
+    
+    if attrs.has_key('geometry_coordinates') and attrs.has_key('geometry_type'):
+	attrs['geometry_coordinates']=json.loads(attrs['geometry_coordinates'])
+	    
+	if str(attrs['geometry_type'])=="Polygon":
+	    attrs['geometry_polygon'] = attrs['geometry_coordinates']
+	    del attrs['geometry_coordinates']
+	    centroid = Polygon(attrs['geometry_polygon'])
+	    centroidpoint = centroid.representative_point()._get_coords()[0]
+	    
+	    attrs['geometry_centroid'] = list(centroidpoint)
+   
+	if str(attrs['geometry_type'])=="LineString":
+	    attrs['geometry_linestring'] = attrs['geometry_coordinates']
+	    centroid = LineString(attrs['geometry_linestring'])
+	    centroidpoint= centroid.representative_point()._get_coords()[0]
+	    del attrs['geometry_coordinates']
+	    attrs['geometry_centroid'] = list(centroidpoint)
+
+	elif str(attrs['geometry_type'])=="Point":
+	    attrs['geometry_centroid'] = attrs['geometry_coordinates']
+
+    
     try:
         mconnection =  Connection(settings.MONGO_HOST, settings.MONGO_PORT)
         db = mconnection[settings.MONGO_DB_NAME]
-        
+
         if not collection_name:
             """if no collection given, use the main one"""
-            transactions = db[settings.MONGO_DB_NAME] 
+            transactions = db[settings.MONGO_DB_NAME]
         else:
             transactions = db[collection_name]
-            
-        history = db[settings.MONGO_HISTORYDB_NAME]    
+
+        history = db[settings.MONGO_HISTORYDB_NAME]
+
     except:
-        #print str(sys.exc_info())
+        print str(sys.exc_info())
         result_list=[]    
     
     s=Since.objects.get(pk=1)   
     
     try: 
-        """Make sure out coordinates are a list, not a string """
-        attrs['geometry_coordinates']=json.loads(attrs['geometry_coordinates'])
-        """Convert alt_names into a list"""    
+	"""Convert alt_names into a list"""    
         if attrs.has_key('alt_names'):
             attrs['alt_names']=json.loads(attrs['alt_names'])
         """Convert tags into a list"""    
         if attrs.has_key('tags'):
                 attrs['tags']=json.loads(attrs['tags'])   
 	if attrs.has_key('classifiers'):
-	    #print "Classifiers: ", attrs['classifiers']
 	    attrs['classifiers']=json.loads(attrs['classifiers'])
-	
+
         if tr_id:
             """Copy the old tx to the historical collection"""        
             responsedict=raw_query_mongo_db({'id': tr_id})
@@ -119,7 +158,6 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
             """Use the original tx_id handle"""
             attrs['id']=str(tr_id)
             
-
             """Set the new uuid"""
             s=Since.objects.get(pk=1)
 	    """Set the Since ID"""
@@ -154,22 +192,21 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
             attrs['_id']=str(uuid.uuid4())
             """build the tr_id a.k.a. handle"""
             if attrs['geometry_type']=='Point':
-                attrs['id']=build_geohash_id(attrs['geometry_coordinates'][0],
-                                             attrs['geometry_coordinates'][1])
+                attrs['id']=build_geohash_id(attrs['geometry_centroid'][0],
+                                             attrs['geometry_centroid'][1])
                 
             else:
                 attrs['id']=build_pretty_id(attrs['_id'])
-            
-
                 
             """Set the Since ID"""
             attrs['sinceid']=s.sinceid
             attrs['verified']=False
             attrs['epoch']=build_utcnow_epoch_timestamp()
-            my_id=transactions.insert(attrs)
-            mysearchresult=transactions.find({'_id':attrs['_id']})
-            
-        for d in mysearchresult:
+	    
+	    my_id=transactions.insert(attrs)
+	    mysearchresult=transactions.find({'_id':attrs['_id']})
+	    
+	for d in mysearchresult:
             d=unflatten(d)
             result_list.append(d)
             d['type']="Feature"
@@ -177,7 +214,10 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
         s.sinceid=int(s.sinceid) + 1
         s.save()
     except:
-        
-        
+        print sys.exc_info()
         result_list=[]
     return result_list
+
+
+def handle_uploaded_shapefile(f):       
+    pass

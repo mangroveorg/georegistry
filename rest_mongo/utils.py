@@ -269,11 +269,30 @@ def add_href(d):
 
 def unflatten_geometry(d):
     """Unflatten gemoetry"""
-    d['geometry'] = {"type": str(d['geometry_type']),
+    if d['geometry_type']=="Point":
+        d['geometry'] = {"type": str(d['geometry_type']),
                      "coordinates": list(d['geometry_coordinates'])
                      }
+    elif d['geometry_type']=="Polygon":
+        d['geometry'] = {"type": str(d['geometry_type']),
+                     "coordinates": list(d['geometry_polygon'])
+                     }
+        
+    elif d['geometry_type']=="LineString":
+        d['geometry'] = {"type": str(d['geometry_type']),
+                     "coordinates": list(d['geometry_linestring'])
+                     }
     del d['geometry_type']
-    del d['geometry_coordinates']
+    
+    if d.has_key('geometry_coordinates'):
+        del d['geometry_coordinates']
+    
+    if d.has_key('geometry_polygon'):
+        del d['geometry_polygon']
+    
+    if d.has_key('geometry_linestring'):
+        del d['geometry_linestring']
+    
     return d
     
 
