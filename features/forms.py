@@ -16,7 +16,7 @@ try:
     cl=Classifiers.objects.all()
     for i in cl:
         classifiers_list.append(i)
-        classifiers_list2.append(i.__to_json__())
+        classifiers_list2.append(i)
     classifiers_list=tuple(classifiers_list)
     
     classifier_choices_tuple=tuple(classifiers_list)
@@ -24,7 +24,6 @@ try:
     
 except():
     pass
-
 
 class FeatureUploadForm(JsonMongoForm):
     """ Create / update a geographic feature and save it into MongoDB """
@@ -45,10 +44,9 @@ class FeatureUploadForm(JsonMongoForm):
                                           choices=geometry_choices )
     geometry_coordinates = forms.CharField(label="Geometry Coordinates", 
                                            required=False)
-    
+
     classifiers = forms.TypedChoiceField(label="Classifiers", 
                                           choices=classifier_choices)
-    
     country_code = forms.CharField(max_length=2, 
                                    label="2 Letter ISO Country Code (Level 0)",
                                    validators=[country_code.validate])
@@ -78,14 +76,7 @@ class FeatureUploadForm(JsonMongoForm):
     license = forms.CharField(max_length=300, label="license", required=False)
     contact_name=forms.CharField(max_length=300, label="contact_name", required=False)
     contact_position=forms.CharField(max_length=300, label="contact_position", required=False)
-    school_type=forms.CharField(max_length=300, label="school_type", required=False)
-    local_id=forms.CharField(max_length=300, label="local_id", required=False)
-    religious=forms.CharField(max_length=300, label="religious", required=False)
-    curriculum_type=forms.CharField(max_length=300, label="curriculum_type", required=False)
-    power_sources=forms.CharField(max_length=300, label="power_sources", required=False)
-    classrooms_multiple_use=forms.CharField(max_length=300, label="classrooms_multiple_use", required=False)
-    desks=forms.CharField(max_length=300, label="desks", required=False)
-    benches_chairs=forms.CharField(max_length=300, label="benches_chairs", required=False)
+    
 
     
     
@@ -152,9 +143,8 @@ class FeatureUpdateUploadForm(JsonMongoForm):
     postcode = forms.CharField(max_length=30, label="Postal Code", required=False)
     owner = forms.CharField(max_length=300, label="owner", required=False)
     license = forms.CharField(max_length=300, label="license", required=False)
-    
-    name_value_pairs = forms.CharField(max_length=1024, required=False,
-                                       label="name_value_pairs as a json dict")
+    contact_name=forms.CharField(max_length=300, label="contact_name", required=False)
+    contact_position=forms.CharField(max_length=300, label="contact_position", required=False)
     
     
     def clean_geometry_coordinates(self, *args, **kwargs):
@@ -223,10 +213,8 @@ class FeatureEditUploadForm(JsonMongoForm):
     postcode = forms.CharField(max_length=30, label="Postal Code", required=False)
     owner = forms.CharField(max_length=300, label="owner", required=False)
     license = forms.CharField(max_length=300, label="license", required=False)
-    
-    name_value_pairs = forms.CharField(max_length=1024, required=False,
-                                       label="name_value_pairs as a json dict")
-    
+    contact_name=forms.CharField(max_length=300, label="contact_name", required=False)
+    contact_position=forms.CharField(max_length=300, label="contact_position", required=False)
     
     def clean_geometry_coordinates(self, *args, **kwargs):
         geometry_coordinates = self.cleaned_data['geometry_coordinates']
