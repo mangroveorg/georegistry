@@ -92,8 +92,15 @@ Setup on Ubuntu 10.10:
 Grab the necessary prerequisite Ubuntu packages
 ::
     sudo apt-get update
-    sudo apt-get install python-imaging git-core build-essental python2.6-dev python-setuptools libdecodeqr0 libdecodeqr-dev libqrencode3 libqrencode-dev
+    sudo apt-get install libgeos-c1 python-imaging git-core build-essental python2.6-dev python-setuptools libdecodeqr0 libdecodeqr-dev libqrencode3 libqrencode-dev
     sudo easy_install pip
+    
+Install Rtree
+::
+    wget http://download.osgeo.org/libspatialindex/spatialindex-src-1.6.1.tar.gz
+    tar zxvf spatialindex-src-1.6.1.tar.gz
+    cd spatialindex-src-1.6.1
+    ./configure; make; sudo make install;
 
 Install Django 1.3
 ::

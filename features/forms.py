@@ -42,9 +42,13 @@ class FeatureUploadForm(JsonMongoForm):
                                 )
     geometry_type = forms.TypedChoiceField(label="Geometry Type*", 
                                           choices=geometry_choices )
-    geometry_coordinates = forms.CharField(label="Geometry Coordinates", 
+    geometry_coordinates = forms.CharField(widget=forms.Textarea(),
+                                            label="Geometry Coordinates", 
                                            required=False)
-
+    geometry_centroid = forms.CharField(label="Geometry Centroid", 
+                                           required=False)
+    bounds = forms.CharField(label="Bounds", required=False)
+    
     classifiers = forms.TypedChoiceField(label="Classifiers", 
                                           choices=classifier_choices)
     country_code = forms.CharField(max_length=2, 
@@ -52,6 +56,7 @@ class FeatureUploadForm(JsonMongoForm):
                                    validators=[country_code.validate])
     subdivision_code = forms.CharField(max_length=2, 
                                        label="ISO Subdivision Code (Level 1)",
+                                       required=False
                                        #validators=[subdivision_code.validate]
                                        )
     level2_admin_boarder_code = forms.CharField(max_length=50, required=False, 

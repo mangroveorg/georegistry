@@ -89,8 +89,6 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
     #turn our classifier string into a python dict
     p=str(attrs['classifiers']).split(".")
     
-    print p
-    print len(p)
     if len(p)==2:
 	attrs['classifiers']={"type":p[0], "category":p[1], "subcategory":""}
     if len(p)==3:
@@ -99,19 +97,26 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
     """
     Make sure  the a single 2d index exists in geometry_centroid
     """
-    """Make sure out coordinates are a list, not a string """
+    
+    """Make sure our coordinates are a list, not a string """
+    if attrs.has_key('bounds'):
+	attrs['bounds']=json.loads(attrs['bounds'])
+    
+    
+    """Make sure our coordinates are a list, not a string """
     
     if attrs.has_key('geometry_coordinates') and attrs.has_key('geometry_type'):
 	attrs['geometry_coordinates']=json.loads(attrs['geometry_coordinates'])
 	    
-	if str(attrs['geometry_type'])=="Polygon":
+	if str(attrs['geometry_type'])=="Polygon" or \
+	str(attrs['geometry_type'])=="MultiPolygon" :
 	    attrs['geometry_polygon'] = attrs['geometry_coordinates']
 	    del attrs['geometry_coordinates']
-	    centroid = Polygon(attrs['geometry_polygon'])
-	    centroidpoint = centroid.representative_point()._get_coords()[0]
-	    
-	    attrs['geometry_centroid'] = list(centroidpoint)
-   
+	    if not attrs.has_key('geometry_centroid'):
+		centroid = Polygon(attrs['geometry_polygon'])
+		centroidpoint = centroid.representative_point()._get_coords()[0]
+		attrs['geometry_centroid'] = list(centroidpoint)
+
 	if str(attrs['geometry_type'])=="LineString":
 	    attrs['geometry_linestring'] = attrs['geometry_coordinates']
 	    centroid = LineString(attrs['geometry_linestring'])
@@ -122,7 +127,6 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
 	elif str(attrs['geometry_type'])=="Point":
 	    attrs['geometry_centroid'] = attrs['geometry_coordinates']
 
-    
     try:
         mconnection =  Connection(settings.MONGO_HOST, settings.MONGO_PORT)
         db = mconnection[settings.MONGO_DB_NAME]

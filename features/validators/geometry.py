@@ -17,7 +17,6 @@ def validate(geometry_coordinates, geometry_type):
     Ensure the given geometry is a valid Polygon, Linestring or Point. Raise
     ValidationError otherwise.
     """
-    
     #Check geometry is a list
     try:
         l = json.loads(geometry_coordinates)

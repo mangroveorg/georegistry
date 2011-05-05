@@ -88,6 +88,7 @@ geometry_choices =(
                 ('Point','Point'),
                 ('LineString','LineString'),
                 ('Polygon','Polygon'),
+                ('MultiPolygon','MultiPolygon'),
              )
 
 forbidden_system_fields =('gr_status','gr_validity')
@@ -97,7 +98,7 @@ tr_status_fields =('latest','depricated')
 
 status_choices=(('Latest', 'Latest'),('Depricated', 'Depricated'))
             
-geometry_choices_tuple =('Point','LineString','Polygon')
+geometry_choices_tuple =('Point','LineString', 'Polygon', 'MultiPolygon')
 
 
 validity_choices=(('Unconfirmed','Unconfirmed'),('Validated', 'Validated'))

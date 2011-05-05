@@ -273,7 +273,7 @@ def unflatten_geometry(d):
         d['geometry'] = {"type": str(d['geometry_type']),
                      "coordinates": list(d['geometry_coordinates'])
                      }
-    elif d['geometry_type']=="Polygon":
+    elif d['geometry_type']=="Polygon" or d['geometry_type']=="MultiPolygon" :
         d['geometry'] = {"type": str(d['geometry_type']),
                      "coordinates": list(d['geometry_polygon'])
                      }
