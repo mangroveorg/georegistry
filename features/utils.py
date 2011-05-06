@@ -5,7 +5,8 @@ import uuid
 import datetime, time
 import sys
 from shapely.geometry import Point, Polygon, LineString
-
+from georegistry.simple_locations.models import Area, AreaType
+import slugify
 try:
     import json
 except ImportError:
@@ -209,6 +210,12 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
 	    
 	    my_id=transactions.insert(attrs)
 	    mysearchresult=transactions.find({'_id':attrs['_id']})
+	
+	if attrs['classifiers'].has_key('subcategory'):
+	    if attrs['classifiers']['subcategory'] in ("country", "subdivision", "level-2"):
+		
+		update_or_create_area(attrs, attrs['classifiers']['subcategory'],
+				      mysearchresult[0]['id'])
 	    
 	for d in mysearchresult:
             d=unflatten(d)
@@ -223,5 +230,63 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
     return result_list
 
 
+def update_or_create_area(attrs, subcategory, grid):
+    #print "Im a %s and my GRID is %s" % (subcategory, grid)
+    at=AreaType.objects.get(slug=subcategory)
+    if subcategory=="country":
+	try:
+	    a=Area.objects.get(slug=slugify.slugify(attrs['name']),
+				kind=at, parent=None)
+	    a.feature_id=grid
+	    a.save()
+	except(Area.DoesNotExist):
+	    a=Area.objects.create(name=attrs['name'],
+                                slug=slugify.slugify(attrs['name']),
+                                two_letter_iso_country_code=attrs['country_code'],
+                                kind=at,
+				feature_id=grid,
+                                parent=None)
+	    a.save()
+    elif subcategory=="subdivision":
+	parent=Area.objects.get(two_letter_iso_country_code=attrs['country_code'],
+				 parent=None)
+	try:
+	    a=Area.objects.get(two_letter_iso_country_code=attrs['country_code'],
+			       two_letter_iso_subdivision_code=attrs['subdivision_code'],
+				kind=at, parent=parent)
+	    a.feature_id=grid
+	    a.save()
+	except(Area.DoesNotExist):
+	    a=Area.objects.create(name=attrs['name'],
+                                slug=slugify.slugify(attrs['name']),
+                                two_letter_iso_country_code=attrs['country_code'],
+				two_letter_iso_subdivision_code=attrs['subdivision_code'],
+                                kind=at,
+				feature_id=grid,
+                                parent=parent)
+	
+    elif subcategory=="level-2":
+	
+	subdivision_kind=AreaType.objects.get(slug="subdivision")
+	parent=Area.objects.get(two_letter_iso_country_code=attrs['country_code'],
+				two_letter_iso_subdivision_code=attrs['subdivision_code'],
+				kind=subdivision_kind)
+	try:
+	    a=Area.objects.get(name=attrs['name'],
+				two_letter_iso_country_code=attrs['country_code'],
+			        two_letter_iso_subdivision_code=attrs['subdivision_code'],
+				kind=at, parent=parent)
+	    a.feature_id=grid
+	    a.save()
+	except(Area.DoesNotExist):
+	    a=Area.objects.create(name=attrs['name'],
+                                slug=slugify.slugify(attrs['name']),
+                                two_letter_iso_country_code=attrs['country_code'],
+				two_letter_iso_subdivision_code=attrs['subdivision_code'],
+                                kind=at,
+				feature_id=grid,
+                                parent=parent)
+    
+    
 def handle_uploaded_shapefile(f):       
     pass

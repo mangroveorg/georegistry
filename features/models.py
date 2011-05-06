@@ -97,6 +97,8 @@ tr_status_fields =('latest','depricated')
 
 
 status_choices=(('Latest', 'Latest'),('Depricated', 'Depricated'))
+
+level_choices=(('0', '0'),('1', '1'),('2', '2'),('3', '3'),('4', '4'), ('5', '5'))
             
 geometry_choices_tuple =('Point','LineString', 'Polygon', 'MultiPolygon')
 

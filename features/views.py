@@ -320,8 +320,7 @@ def get_features_locations(request):
         areas=Area.objects.all()
     for a in areas:
         loc={}
-        loc={"name":a.name, "level":a.level, "slug":a.slug}
-
+        loc={"name":a.name, "level":a.level, "slug":a.slug, "feature_id":a.feature_id}
         if a.level==0:
             loc.update({"country_code":a.two_letter_iso_country_code,
                         "parent":None, "children":[]})

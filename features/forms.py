@@ -4,7 +4,7 @@
 from django import forms
 
 from validators import country_code, subdivision_code, geometry
-from models import geometry_choices, validity_choices, status_choices
+from models import geometry_choices, validity_choices, status_choices, level_choices
 
 from georegistry.rest_mongo.forms import JsonMongoForm
 from models import Classifiers
@@ -45,12 +45,14 @@ class FeatureUploadForm(JsonMongoForm):
     geometry_coordinates = forms.CharField(widget=forms.Textarea(),
                                             label="Geometry Coordinates", 
                                            required=False)
-    geometry_centroid = forms.CharField(label="Geometry Centroid", 
+    geometry_centroid = forms.CharField(widget=forms.Textarea(),
+                                        label="Geometry Centroid", 
                                            required=False)
-    bounds = forms.CharField(label="Bounds", required=False)
+    bounds = forms.CharField(widget=forms.Textarea(), label="Bounds",
+                                    required=False)
     
     classifiers = forms.TypedChoiceField(label="Classifiers", 
-                                          choices=classifier_choices)
+                                    choices=classifier_choices)
     country_code = forms.CharField(max_length=2, 
                                    label="2 Letter ISO Country Code (Level 0)",
                                    validators=[country_code.validate])
@@ -59,6 +61,9 @@ class FeatureUploadForm(JsonMongoForm):
                                        required=False
                                        #validators=[subdivision_code.validate]
                                        )
+    level = forms.TypedChoiceField(label="Admin Level", choices=level_choices,
+                                   required=False)
+    
     level2_admin_boarder_code = forms.CharField(max_length=50, required=False, 
                                               label="3rd Level Boarder Code")
     level3_admin_boarder_code = forms.CharField(max_length=50, required=False, 
@@ -82,7 +87,6 @@ class FeatureUploadForm(JsonMongoForm):
     contact_name=forms.CharField(max_length=300, label="contact_name", required=False)
     contact_position=forms.CharField(max_length=300, label="contact_position", required=False)
     
-
     
     
     def clean_geometry_coordinates(self, *args, **kwargs):
