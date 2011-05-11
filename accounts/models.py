@@ -21,7 +21,8 @@ permission_choices=(    ('create_feature',  'create_feature'),
                         ('read_feature',    'read_feature'),
                         ('update_feature',  'update_feature'),
                         ('delete_feature',  'delete_feature'),
-                )
+                        ('verify_feature',  'verify_feature'),
+                    )
 
 class Permission(models.Model):
     user  = models.ForeignKey(User)

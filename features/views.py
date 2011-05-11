@@ -15,7 +15,7 @@ from django.template import RequestContext
 from django.conf import settings
 from forms import *
 from django.views.decorators.csrf import csrf_exempt
-from utils import delete_from_mongo, raw_query_mongo_db, raw_count_mongo_db
+from utils import delete_from_mongo, verify_from_mongo, raw_query_mongo_db, raw_count_mongo_db
 from pymongo.son import SON
 from georegistry.rest_mongo.views import create_document, update_document, edit_document, get_document_by
 
@@ -67,6 +67,28 @@ def delete_feature(request):
     return render_to_response('upload/feature.html', 
                               {'form': FeatureDeleteUploadForm()},
                               context_instance = RequestContext(request))
+
+
+@csrf_exempt 
+@json_login_required
+@access_required("verify_feature")
+def verify_feature(request):
+    """
+        Delete a geographic feature and save changes in Mongo DB.
+        
+        If the feature doesn't exits, return a 404 error.
+    """
+        
+    if request.method == 'POST':
+        if request.POST.has_key('feature_id'):
+            r = verify_from_mongo(request.POST['feature_id'])
+            return HttpResponse("VERIFIED", status=200)
+
+    
+    return render_to_response('upload/feature.html', 
+                              {'form': FeatureVerifyUploadForm()},
+                              context_instance = RequestContext(request))
+
 
 @csrf_exempt     
 @json_login_required

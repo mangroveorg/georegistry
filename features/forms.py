@@ -239,6 +239,14 @@ class FeatureEditUploadForm(JsonMongoForm):
         subdivision_code = self.cleaned_data['subdivision_code']
         return subdivision_code.upper()
 
+
+class FeatureVerifyUploadForm(JsonMongoForm):
+    """ Create / update a geographic feature and save it into Mongo DB """
+    
+    TYPE = 'FeatureCollection'
+    feature_id = forms.CharField(max_length=300, label="FeatureID")
+
+
 class FeatureDeleteUploadForm(JsonMongoForm):
     """ Create / update a geographic feature and save it into Mongo DB """
     

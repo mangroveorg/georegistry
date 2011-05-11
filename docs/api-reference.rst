@@ -88,9 +88,10 @@ Key:
 BASE URL                                                                                    HTTP METHOD FUNCTION
 =========================================================================================== =========== ===================================================================================================================== 
 /api/1.0/createfeature/                                                                     GET/POST    POST:Create a feature in the MAIN collection. GET returns a blank form.
-/api/1.0/updatefeature/<feature_id>                                                         GET/POST    POST:Update the existing feature, feature_id, in the MAIN collection. GET returns a blank form.
-/api/1.0/editfeature/<feature_id>                                                           GET/POST    POST:Edit the existing feature, feature_id, in the MAIN collection. GET returns a prepopulated form.
-/api/1.0/deletefeature/                                                                     GET/POST    POST:Delete the existing feature, feature_id, in the MAIN collection. GET returns a feature_id (single field) form. 
+/api/1.0/updatefeature/<feature_id>                                                         GET/POST    POST:Update an existing feature, feature_id, in the MAIN collection. GET returns a blank form.
+/api/1.0/editfeature/<feature_id>                                                           GET/POST    POST:Edit am existing feature, feature_id, in the MAIN collection. GET returns a prepopulated form.
+/api/1.0/deletefeature/                                                                     GET/POST    POST:Delete an existing feature, feature_id, in the MAIN collection. GET returns a feature_id (single field) form. 
+/api/1.0/verifyfeature/                                                                     GET/POST    POST:Verify an existing feature, feature_id, in the MAIN collection. GET returns a feature_id (single field) form.
 /api/1.0/collection/<collection_name>/updatefeature/<feature_id>                            GET/POST    POST:Update the existing feature, feature_id, in the collection_id. GET returns a blank form.
 /api/1.0/collection/<collection_name>/editfeature/<feature_id>                              GET/POST    POST:Edit the existing feature, feature_id, in the collection_id. GET returns a prepopulated form.
 /api/1.0/collection/<collection_name>/deletefeature/                                        GET/POST    POST:Delete the existing feature, feature_id, in the collection_id. GET returns a feature_id (single field) form.

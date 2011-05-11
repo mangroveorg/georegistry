@@ -125,15 +125,19 @@ the resource).  You need a username and password to access to authenticate.</p>
 </tr>
 <tr><td>/api/1.0/updatefeature/&lt;feature_id&gt;</td>
 <td>GET/POST</td>
-<td>POST:Update the existing feature, feature_id, in the MAIN collection. GET returns a blank form.</td>
+<td>POST:Update an existing feature, feature_id, in the MAIN collection. GET returns a blank form.</td>
 </tr>
 <tr><td>/api/1.0/editfeature/&lt;feature_id&gt;</td>
 <td>GET/POST</td>
-<td>POST:Edit the existing feature, feature_id, in the MAIN collection. GET returns a prepopulated form.</td>
+<td>POST:Edit am existing feature, feature_id, in the MAIN collection. GET returns a prepopulated form.</td>
 </tr>
 <tr><td>/api/1.0/deletefeature/</td>
 <td>GET/POST</td>
-<td>POST:Delete the existing feature, feature_id, in the MAIN collection. GET returns a feature_id (single field) form.</td>
+<td>POST:Delete an existing feature, feature_id, in the MAIN collection. GET returns a feature_id (single field) form.</td>
+</tr>
+<tr><td>/api/1.0/verifyfeature/</td>
+<td>GET/POST</td>
+<td>POST:Verify an existing feature, feature_id, in the MAIN collection. GET returns a feature_id (single field) form.</td>
 </tr>
 <tr><td>/api/1.0/collection/&lt;collection_name&gt;/updatefeature/&lt;feature_id&gt;</td>
 <td>GET/POST</td>
@@ -184,7 +188,7 @@ the resource).  You need a username and password to access to authenticate.</p>
 <td>GET</td>
 <td>Get the QR for a feature at a particular epoch (timestamp)</td>
 </tr>
-<tr><td>/api/1.0/features/search?&lt;some GET query string&gt;</td>
+<tr><td>/api/1.0/features/search?&lt;some GET query string&gt;[&amp;limit=a][&amp;skip=b]</td>
 <td>GET</td>
 <td>Get features that match the search dict passed in.</td>
 </tr>
@@ -192,9 +196,9 @@ the resource).  You need a username and password to access to authenticate.</p>
 <td>GET</td>
 <td>Gat a count of features that match the search dict passed in.</td>
 </tr>
-<tr><td>/api/1.0/features/country/&lt;country_code&gt;[-subdivision_code].json</td>
+<tr><td>/api/1.0/features/country/&lt;country_code&gt;[-subdivision_code].json[?&amp;limit=a][&amp;skip=b]</td>
 <td>GET</td>
-<td>Get all features with a particular country and or subdivision code (ISO 3166-1) eg. GH or GH-AH</td>
+<td>GET         Get all features with a particular country and or subdivision code (ISO 3166-1) eg. GH or GH-AH</td>
 </tr>
 <tr><td>/api/1.0/features/at-point/&lt;lat&gt;/&lt;lon&gt;/</td>
 <td>GET</td>

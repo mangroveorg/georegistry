@@ -57,6 +57,7 @@ urlpatterns = patterns('',
     url(r'^api/1.0/collection/(?P<collection_name>\w+)/editfeature/(?P<feature_id>[^/]+)/$', edit_feature, name="edit_feature"), 
     #update and existing feature
     url(r'^api/1.0/deletefeature/$', delete_feature, name="delete_feature"),
+    url(r'^api/1.0/verifyfeature/$', verify_feature, name="verify_feature"),
     url(r'^api/1.0/collection/(?P<collection_name>\w+)/deletefeature/$', delete_feature, name="delete_feature"),
     
     #get a feature with a particular epoch (returns a json object)

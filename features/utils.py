@@ -51,6 +51,41 @@ def check_for_pos_dupes_via_geoloc(attrs, collection_name=None):
                     attrs['possible_duplicate']=True
     return attrs
     
+def verify_from_mongo(tr_id, collection_name=None):
+   
+    try:
+        mconnection =  Connection(settings.MONGO_HOST, settings.MONGO_PORT)
+        db = mconnection[settings.MONGO_DB_NAME]
+        
+        if not collection_name:
+            """if no collection givben use the main one"""
+            transactions = db[settings.MONGO_DB_NAME] 
+        else:
+            transactions = db[collection_name]
+              
+    except:
+        print str(sys.exc_info())
+        result_list=[]
+    
+    try: 
+    
+        if tr_id:
+            r=transactions.find({'id':tr_id})
+            print r.count()
+	    if 0 < r.count():
+		d={}
+		d.update(r[0])
+		d['verified']=True
+		print d
+		transactions.remove({'id':tr_id})
+		r=transactions.insert(d)
+
+    except():
+        print str(sys.exc_info())
+	result_list=[]
+	return result_list
+
+
 def delete_from_mongo(tr_id, collection_name=None):
     
     try:
@@ -83,7 +118,6 @@ def delete_from_mongo(tr_id, collection_name=None):
 
 def save_to_mongo(attrs, tr_id=None, collection_name=None):
     """returns the saved object or an empty list"""
-    
     result_list=[]
     
     
@@ -199,24 +233,24 @@ def save_to_mongo(attrs, tr_id=None, collection_name=None):
             if attrs['geometry_type']=='Point':
                 attrs['id']=build_geohash_id(attrs['geometry_centroid'][0],
                                              attrs['geometry_centroid'][1])
-                
+
             else:
                 attrs['id']=build_pretty_id(attrs['_id'])
-                
+    
             """Set the Since ID"""
             attrs['sinceid']=s.sinceid
             attrs['verified']=False
             attrs['epoch']=build_utcnow_epoch_timestamp()
-	    
+
 	    my_id=transactions.insert(attrs)
 	    mysearchresult=transactions.find({'_id':attrs['_id']})
 	
 	if attrs['classifiers'].has_key('subcategory'):
 	    if attrs['classifiers']['subcategory'] in ("country", "subdivision", "level-2"):
-		
+
 		update_or_create_area(attrs, attrs['classifiers']['subcategory'],
 				      mysearchresult[0]['id'])
-	    
+
 	for d in mysearchresult:
             d=unflatten(d)
             result_list.append(d)
@@ -287,6 +321,3 @@ def update_or_create_area(attrs, subcategory, grid):
 				feature_id=grid,
                                 parent=parent)
     
-    
-def handle_uploaded_shapefile(f):       
-    pass
