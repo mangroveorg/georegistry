@@ -40,6 +40,8 @@ class FeatureUploadForm(JsonMongoForm):
                                 label="List of Comma-seperated tags in double quotes",
                                 required=False
                                 )
+    file  = forms.FileField(required=False)
+    
     geometry_type = forms.TypedChoiceField(label="Geometry Type*", 
                                           choices=geometry_choices )
     geometry_coordinates = forms.CharField(widget=forms.Textarea(),
@@ -86,7 +88,7 @@ class FeatureUploadForm(JsonMongoForm):
     license = forms.CharField(max_length=300, label="license", required=False)
     contact_name=forms.CharField(max_length=300, label="contact_name", required=False)
     contact_position=forms.CharField(max_length=300, label="contact_position", required=False)
-    
+   
     
     
     def clean_geometry_coordinates(self, *args, **kwargs):

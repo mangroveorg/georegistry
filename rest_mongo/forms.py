@@ -20,7 +20,7 @@ class JsonMongoForm(forms.Form):
     def __init__(self, data=None, request=None, *args, **kwargs):
         self.request = request
         forms.Form.__init__(self, data, *args, **kwargs)
-
+            
     
     def clean(self, *args, **kwargs):
         """
@@ -29,7 +29,10 @@ class JsonMongoForm(forms.Form):
         if '_id' in self.cleaned_data:
             self.cleaned_data['_id'] = str(uuid.uuid4())
         if self.request:
-            self.cleaned_data['owner'] = getattr(self.request.user, 'username', '') 
+            self.cleaned_data['owner'] = getattr(self.request.user, 'username', '')
+            
+            if 'urli' in self.data.keys():
+                self.cleaned_data['urli'] = self.data['urli']
         new_cleaned_data={}  
         
         if not self.cleaned_data.has_key('edit'):

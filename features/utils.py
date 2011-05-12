@@ -32,6 +32,7 @@ from georegistry.rest_mongo.views import get_document_by
 from pymongo.son import SON
 from georegistry.features.models import ClassifierCategories
 
+
 def check_for_pos_dupes_via_geoloc(attrs, collection_name=None):
     if attrs['geometry_type']=="Point":
             ll = {'$near':[float(attrs['geometry_centroid'][0]),

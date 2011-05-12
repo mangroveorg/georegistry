@@ -267,6 +267,13 @@ def add_href(d):
                               )
     return d
 
+def add_filehref(d):
+    if d.has_key('urli') and settings.BINARY_STORAGE=="LOCAL":
+        d['urli']="%s%s" % (settings.BASE_FILE_URL, d['urli'])
+    return d
+
+
+
 def unflatten_geometry(d):
     """Unflatten gemoetry"""
     if d['geometry_type']=="Point":
@@ -313,4 +320,4 @@ def unflatten_properties(d):
 
 def unflatten(d):
     "Unflatten results from object store into GeoJSON"
-    return unflatten_properties(unflatten_geometry(add_href(d)))
+    return unflatten_properties(unflatten_geometry(add_href(add_filehref(d))))

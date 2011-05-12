@@ -4,12 +4,15 @@
 try:
     import json
 except ImportError:
-    import simplejson
+    import simplejson as json
 
 from django.http import HttpResponse
 
 from utils import query_mongo_db
-
+from fileutils import handle_uploaded_file
+from django.contrib.auth.models import User
+from django.conf import settings
+import uuid
 
 def create_document(request, form_class, additional_fields={}, render_response=True):
     """
@@ -25,9 +28,31 @@ def create_document(request, form_class, additional_fields={}, render_response=T
         ::keyword render_response:: optional, whether to return an HTTPResponse or
                                     a Python dict. Default is True.
     """
-    
+    attrs={}    
     data = request.POST.copy()
-    data.update(additional_fields)
+    file=request.FILES
+    for attr in request.FILES:
+        #print "A file is peresent so process it at the end of validation."
+        print "%s=%s" % (attr,request.FILES[attr])
+        data['file'] = True
+    
+    """Upload the file if one is provided"""
+    if data.has_key('file'):
+        """Upload a file if one was attached to the transaction"""
+        respdict=handle_uploaded_file(request.FILES['file'], request.user , str(uuid.uuid4()))
+        if respdict.has_key('errors'):
+            jsonstr={"code": "500", "message": str(respdict['errors'])}
+            jsonstr=json.dumps(jsonstr, indent = 4,)
+            return HttpResponse( jsonstr, status=500)
+
+        else:
+            if settings.BINARY_STORAGE=='LOCAL':
+                attrs['urli']=respdict['urli']
+
+            if settings.BINARY_STORAGE=='AWSS3':
+                attrs['urli']=respdict['urli']
+    
+    data.update(attrs)
     form = form_class(data, request)
     responsedict = form.save() if form.is_valid() else form.errors 
     r={}
