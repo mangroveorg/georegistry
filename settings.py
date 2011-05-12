@@ -121,12 +121,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'georegistry.features',
-    'simple_locations',
+    'georegistry.simple_locations',
     'mptt',
     'registration',
     'mediasync',
     'georegistry.accounts',
-    'georegistry.webhook',
+    'georegistry.counters',
     #'xform_manager',
     # Uncomment the next line to enable admin documentation:
     #'django.contrib.admindocs',
@@ -137,10 +137,12 @@ API_AUTH_REQUIRED = True
 
 MONGO_HOST = "127.0.0.1"
 MONGO_PORT = 27017
-MONGO_DB_NAME = "trkr05"
+MONGO_DB_NAME = "nigeria08"
 MONGO_HISTORYDB_NAME = "history"
 MONGO_VERIFIEDDB_NAME = "verified"
 BASE_FEATURES_URL="http://127.0.0.1:8000/api/1.0/feature/"
+
+BASE_FILE_URL="http://127.0.0.1:8000/media/"
 
 ACCOUNT_ACTIVATION_DAYS = 2
 RESTRICT_REG_DOMAIN_TO = None
@@ -150,3 +152,16 @@ EMAIL_HOST = 'smtp.bizmail.yahoo.com'
 EMAIL_PORT = 587 #25 by default
 EMAIL_HOST_USER = 'no-reply@videntity.com'
 EMAIL_HOST_PASSWORD = 'mypassword'
+
+
+BINARY_STORAGE="LOCAL" #This should be 'LOCAL', 'AWSS3', or None
+
+if BINARY_STORAGE=="AWSS3":
+    AWS_BUCKET="georegisitrybucket"
+    AWS_KEY="----"
+    AWS_SECRET="--------------------------"
+    AWS_PUBLIC=True
+elif BINARY_STORAGE=="LOCAL": 
+    LOCAL_BINARY_FILE_DIR=os.path.join(BASE_DIR, 'media') 
+else:
+    BINARY_STORAGE=None
