@@ -16,7 +16,20 @@ import os, uuid, time, sys
 from datetime import datetime, timedelta
 from django.conf import settings 
 
+from shapely.geometry import Polygon, MultiPolygon
+import exceptions
+from shapely.wkb import loads
 
+
+
+def mysimplify(value, geometry_type, geometry_coordinates):
+    print """return simplified geom coords"""
+    if geometry_type=="Polygon":
+        p=Polygon(geometry_coordinates[0])
+    elif geometry_type=="MultiPolygon":
+        mp=MultiPolygon([geometry_coordinates,])
+    return geometry_coordinates
+    
 def build_utcnow_epoch_timestamp():
     """Build a timestamp in epoch format from UTC time"""
     date = datetime.utcnow().timetuple()
@@ -73,7 +86,7 @@ def query_mongo_db_forms(kwargs, collection_name=None):
 #if not in this list then we should pack it into properties or geometry
 top_level_fields=('total', 'status', 'geometry',)
 feature_level_fields=('id', 'epoch', 'sinceid', '_id', '')
-def query_mongo_db(kwargs, limit=None, skip=0, collection_name=None):
+def query_mongo_db(kwargs, limit=None, skip=0, simplify=0, collection_name=None):
     """
     query mongo and unflatten the results so its pretty json
     """
@@ -82,6 +95,8 @@ def query_mongo_db(kwargs, limit=None, skip=0, collection_name=None):
         limit=int(limit)
     if skip:
         skip=int(skip)
+    if simplify:
+        simplify=float(simplify)
     features=[]
     search_list=False
     response_dict={'status': 404,
@@ -121,6 +136,10 @@ def query_mongo_db(kwargs, limit=None, skip=0, collection_name=None):
                     response_dict['status']=200
                     response_dict['total']=response_dict['total']+ mysearchcount
                     for d in mysearchresult:
+                        if simplify and d["geometry_type"] in ("Polygon", "MultiPolygon"):
+                            d["geometry_polygon"]=mysimplify(simplify,
+                                                             d["geometry_type"],
+                                                             d["geometry_polygon"] )  
                         d=unflatten(d)
                         response_dict['features'].append(d)
                         d['type']="Feature"
@@ -135,6 +154,10 @@ def query_mongo_db(kwargs, limit=None, skip=0, collection_name=None):
                 response_dict['status']=200
                 response_dict['total']=response_dict['total']+ mysearchcount
                 for d in mysearchresult:
+                    if simplify and d["geometry_type"] in ("Polygon", "MultiPolygon"):
+                        d["geometry_polygon"]=mysimplify(simplify,
+                                                             d["geometry_type"],
+                                                             d["geometry_polygon"] )                        
                     d=unflatten(d)
                     response_dict['features'].append(d)
                     d['type']="Feature"
@@ -155,6 +178,10 @@ def query_mongo_db(kwargs, limit=None, skip=0, collection_name=None):
                         response_dict['status']=200
                         response_dict['total']=response_dict['total']+ mysearchcount
                         for d in mysearchresult:
+                            if simplify and d["geometry_type"] in ("Polygon", "MultiPolygon"):
+                                d["geometry_polygon"]=mysimplify(simplify,
+                                                             d["geometry_type"],
+                                                             d["geometry_polygon"] )  
                             d=unflatten(d)
                             response_dict['features'].append(d)
                             d['type']="Feature"

@@ -12,3 +12,4 @@ Django
 geohash
 shapely
 Rtree
+boto

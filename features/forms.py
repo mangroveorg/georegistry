@@ -117,7 +117,7 @@ class FeatureUpdateUploadForm(JsonMongoForm):
                                 label="List of Comma-seperated Alternate Names in double quotes",
                                 required=False
                                 )
-    
+    file  = forms.FileField(required=False)
     tags = forms.CharField(max_length=300,
                                 label="List of Comma-seperated tags in double quotes",
                                 required=False
@@ -183,7 +183,7 @@ class FeatureEditUploadForm(JsonMongoForm):
                                 label="List of Comma-seperated Alternate Names in double quotes",
                                 required=False
                                 )
-
+    file  = forms.FileField(required=False)
     tags = forms.CharField(max_length=300,
                                 label="List of Comma-seperated tags in double quotes",
                                 required=False

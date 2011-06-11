@@ -141,7 +141,7 @@ def edit_document(request, feature_id,
     return HttpResponse(json.dumps(responsedict, indent=4), 
                         status=responsedict['status'])                         
 
-def get_document_by(request, limit=50, skip=0, collection_name=None, 
+def get_document_by(request, limit=50, skip=0, simplify=0, collection_name=None, 
                     search_in=('get', 'post', 'url'), 
                     render_response=True, **kwargs):
     """
@@ -170,14 +170,17 @@ def get_document_by(request, limit=50, skip=0, collection_name=None,
     
     if newgetrequest.has_key('skip'):
         skip=newgetrequest['skip']  
-        del newgetrequest['skip']    
+        del newgetrequest['skip']
         
+    if newgetrequest.has_key('simplify'):
+        simplify=newgetrequest['simplify']  
+        del newgetrequest['simplify']         
     search = {'get': newgetrequest, 'post': request.POST, 'url': kwargs}
     
     # cast querydict in dict and merge them in one dict
     for s in search_in:
         data.update(search[s].iteritems())
-    responsedict = query_mongo_db(data, limit, skip, collection_name)
+    responsedict = query_mongo_db(data, limit, skip, simplify, collection_name)
     
     if not render_response:
         return responsedict

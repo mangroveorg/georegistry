@@ -239,11 +239,11 @@ def get_features_in_country_subdivision(request, country_subdivision_code):
 
 #@json_login_required
 #@access_required("read_feature")
-def get_features_search_dict(request, limit=50, skip=0):
+def get_features_search_dict(request, limit=50, skip=0, simplify=0):
     """
         Return a geographic features matching GET parameters.
     """
-    return get_document_by(request, limit, skip, search_in=('get',))
+    return get_document_by(request, limit, skip, simplify, search_in=('get',))
     
 def get_countfeatures_search_dict(request, collection_name=None):
     """
