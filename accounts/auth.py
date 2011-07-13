@@ -15,6 +15,8 @@ from georegistry.accounts.models import UserProfile
 
 
 class BasicBackend:
+    
+    supports_anonymous_user=False
     def get_user(self, user_id):
         try:
             return User.objects.get(pk=user_id)
@@ -22,6 +24,7 @@ class BasicBackend:
             return None
 
 class EmailBackend(BasicBackend):
+    supports_anonymous_user=False
     def authenticate(self, username=None, password=None):
         #If username is an email address, then try to pull it up
         if email_re.search(username):
@@ -42,6 +45,7 @@ class EmailBackend(BasicBackend):
 
 
 class MobilePINBackend(BasicBackend):
+    supports_anonymous_user=False
     def authenticate(self, username=None, password=None):
         try:
             up = UserProfile.objects.get(mobile_phone_number=username)
@@ -62,7 +66,7 @@ class MobilePINBackend(BasicBackend):
 
 
 class HTTPAuthBackend(BasicBackend):
-        
+    supports_anonymous_user=False    
     def __init__(self, auth_func=authenticate, realm='API'):
         self.auth_func = auth_func
         self.realm = realm
