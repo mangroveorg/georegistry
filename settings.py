@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
@@ -62,8 +62,8 @@ MEDIA_URL = 'http://127.0.0.1:8000/site_media/'
 
 MEDIASYNC = {
     'BACKEND': 'mediasync.backends.s3',
-    'AWS_KEY': "125PVS8477V1GR75H2sdfdsf",
-    'AWS_SECRET': "FvZLqApBXmlBw9QsdfsdfLaDJRtVm3YZTPkkjOJm",
+    'AWS_KEY': "",
+    'AWS_SECRET': "",
     'AWS_BUCKET': "changethis",
 }
 MEDIASYNC['SERVE_REMOTE'] = False
@@ -150,16 +150,16 @@ MIN_PASSWORD_LEN = 8
 
 EMAIL_HOST = 'smtp.bizmail.yahoo.com'
 EMAIL_PORT = 587 #25 by default
-EMAIL_HOST_USER = 'no-reply@videntity.com'
-EMAIL_HOST_PASSWORD = 'mypassword'
+EMAIL_HOST_USER = 'fooy@georegistry.org'
+EMAIL_HOST_PASSWORD = ''
 
 
-BINARY_STORAGE="LOCAL" #This should be 'LOCAL', 'AWSS3', or None
+BINARY_STORAGE="AWSS3" #This should be 'LOCAL', 'AWSS3', or None
 
 if BINARY_STORAGE=="AWSS3":
-    AWS_BUCKET="georegisitrybucket"
-    AWS_KEY="----"
-    AWS_SECRET="--------------------------"
+    AWS_BUCKET="georegisitry"
+    AWS_KEY=""
+    AWS_SECRET=""
     AWS_PUBLIC=True
 elif BINARY_STORAGE=="LOCAL": 
     LOCAL_BINARY_FILE_DIR=os.path.join(BASE_DIR, 'media') 
