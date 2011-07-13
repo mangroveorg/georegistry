@@ -7,7 +7,7 @@ from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 import mimetypes
 from datetime import datetime, timedelta
-
+import uuid
 """
 simpleS3.py
 """
@@ -52,7 +52,7 @@ class SimpleS3:
 
     #Store a file in s3
     def store_in_s3 (self, bucket,
-                     filename,
+                     keyname,
                      local_filepath,
                      public=False):
 
@@ -63,9 +63,9 @@ class SimpleS3:
                                    settings.AWS_SECRET)
                 b = conn.create_bucket(bucket)
                 k=Key(b)
-                k.key=filename
+                k.key=keyname
 
-                mime = mimetypes.guess_type(filename)[0]
+                mime = mimetypes.guess_type(keyname)[0]
 
                 if mime==None:
                     #print "I couldn't guess MIME because"
@@ -76,12 +76,14 @@ class SimpleS3:
 
                 #print "MIME Type = %s" % (mime)
                 k.set_metadata("Content-Type", mime)
+                print local_filepath
                 k.set_contents_from_filename(local_filepath)
                 if public==True:
                     k.set_acl("public-read")
                 url = "https://%s.s3.amazonaws.com/%s" % (bucket,
                                                           k.key)
             except:
+                print sys.exc_info()
                 return url
             finally:
                 return url
@@ -112,14 +114,16 @@ class SimpleS3:
     # If mode=GET, then read the file from S3,
     # and write it to local disk
 
-def handle_uploaded_file(file, user, uuid):
+def handle_uploaded_file(file, user, uuid=str(uuid.uuid4())):
     responsedict={'localfilename':None,
                   'urli': None
                   }
     
     #create folder name for the api username
     dirname = '%s/%s/' %(settings.MEDIA_ROOT, user.username)
-
+    
+    file_name, file_ext = file.name.split(".")
+    print file_name, file_ext
     try:
         #create directory if it doesn't exist
         if not os.path.isdir(dirname):
@@ -130,11 +134,11 @@ def handle_uploaded_file(file, user, uuid):
         time_str=current_time.replace(" ", '_')
         
         #create file name by using current datetime
-        new_file_name='%s_%s' %(file.name, uuid)
+        new_file_name='%s_%s.%s' %(file_name, uuid, file_ext)
         
         #create the entire directory string
         file_name='%s%s' %(dirname, new_file_name)
-            
+        full_file_path=os.path.join(settings.BASE_DIR, file_name)
         #open to write
         destination = open(file_name, 'wb')
     
@@ -145,8 +149,7 @@ def handle_uploaded_file(file, user, uuid):
         full_path=file_name
         file_name="%s/%s" %(user.username, new_file_name)
     except:
-        responsedict['errors']="There was an error uploading your file."
-        print sys.exc_info()
+        responsedict['errors']="There was an error uploading your file. %s" % (str(sys.exc_info())) 
         return responsedict
     
     if settings.BINARY_STORAGE=='LOCAL':    
@@ -158,8 +161,9 @@ def handle_uploaded_file(file, user, uuid):
         s=SimpleS3()
         responsedict['urli']=s.store_in_s3 (settings.AWS_BUCKET,
                                             new_file_name,
-                                            file_name,
+                                            full_file_path,
                                             settings.AWS_PUBLIC)
+        
         if responsedict['urli']=="":
             responsedict['errors']="AWS S3 file %s upload failed" % (new_file_name)
             

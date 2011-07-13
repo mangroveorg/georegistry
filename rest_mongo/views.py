@@ -30,16 +30,16 @@ def create_document(request, form_class, additional_fields={}, render_response=T
     """
     attrs={}    
     data = request.POST.copy()
-    file=request.FILES
+    #file=request.FILES
     for attr in request.FILES:
         #print "A file is peresent so process it at the end of validation."
-        print "%s=%s" % (attr,request.FILES[attr])
+        #print "%s=%s" % (attr,request.FILES[attr])
         data['file'] = True
     
     """Upload the file if one is provided"""
     if data.has_key('file'):
         """Upload a file if one was attached to the transaction"""
-        respdict=handle_uploaded_file(request.FILES['file'], request.user , str(uuid.uuid4()))
+        respdict=handle_uploaded_file(request.FILES['file'], request.user)
         if respdict.has_key('errors'):
             jsonstr={"code": "500", "message": str(respdict['errors'])}
             jsonstr=json.dumps(jsonstr, indent = 4,)
